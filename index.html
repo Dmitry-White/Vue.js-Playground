@@ -9,29 +9,27 @@
 </head>
 
 <body>
-    <div id="exercise">
-        <p>VueJS is pretty cool - {{ name }} ({{ age }})</p>
-        <p>{{ age * 3 }}</p>
-        <p>{{ randomFloat() }}</p>
-        <div>
-            <img style="width:100px;height:100px" v-bind:src="pic">
-        </div>
-        <div>
-            <input type="text" v-bind:value="name">
-        </div>
+    <div id="app">
+        <button v-on:click="increase">Click me</button>
+        <p>{{ counter }}</p>
+        <p v-on:mousemove="updateCoordinates">Coordinates {{ x }} / {{ y }}</p>
     </div>
 
     <script>
         new Vue({
-            el: '#exercise',
+            el: '#app',
             data: {
-                name: 'Dmitry',
-                age: 24,
-                pic: "https://pbs.twimg.com/profile_images/875996174305472512/upM71pVR_400x400.jpg"
+                counter: 0,
+                x: 0,
+                y: 0
             },
             methods: {
-                randomFloat: function () {
-                    return Math.random();
+                increase: function () {
+                    this.counter++
+                },
+                updateCoordinates: function (event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
                 }
             }
         });
