@@ -1,10 +1,6 @@
 new Vue({
-    el: '#exercise',
+    el: '#app',
     data: {
-        value: ''
-    },
-    methods: {
-        showAlert: function () { alert('Button clicked') },
-        changeValue: function (event) { this.value = event.target.value }
+        name: 'Dmitry'
     }
 });

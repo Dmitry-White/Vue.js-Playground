@@ -9,18 +9,9 @@
 </head>
 
 <body>
-    <div id="exercise">
-        <div>
-            <button v-on:click="showAlert">Show Alert</button>
-        </div>
-        <div>
-            <input type="text" v-on:keydown="changeValue">
-            <p>{{ value }}</p>
-        </div>
-        <div>
-            <input type="text" v-on:keydown.enter="changeValue">
-            <p>{{ value }}</p>
-        </div>
+    <div id="app">
+        <input type="text" v-model="name">
+        <p>{{ name }}</p>
     </div>
     <script src="app.js"></script>
 </body>
