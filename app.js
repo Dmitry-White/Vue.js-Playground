@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     data: {
         counter: 0,
+        secondCounter: 0
     },
     methods: {
         result() {
