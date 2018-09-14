@@ -10,8 +10,8 @@
 
 <body>
     <div id="app">
-        <button v-on:click="changeLink">Click to change</button>
-        <a v-bind:href="link">Link</a>
+        <button @click="changeLink">Click to change</button>
+        <a :href="link">Link</a>
     </div>
     <script src="app.js"></script>
 </body>
