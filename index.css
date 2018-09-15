@@ -14,17 +14,25 @@
   width: 50px !important;
 }
 
-.green {
-  background-color: green;
+.blue {
+  background-color: blue;
+}
+
+.float {
+  float: right;
+}
+
+.text-color {
+  color: yellow;
+}
+
+.visible {
+  width: 100px;
   height: 50px;
 }
 
-.wide {
+.progress-bar {
   width: 200px;
+  height: 20px;
+  border: 1px solid black;
 }
-
-.black {
-  background-color: black;
-  height: 60px;
-}
-  
