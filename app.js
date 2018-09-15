@@ -1,15 +1,16 @@
 new Vue({
-    el: '#app',
+    el: '#exercise',
     data: {
-        color: 'green',
-        width: 100
+        interval: '',
+        effect: true,
     },
-    computed: {
-        myStyle: function () {
-            return {
-                backgroundColor: this.color,
-                width: this.width + 'px'
-            }
+    methods: {
+        startEffect: function () {
+            var vm = this;
+            clearInterval(vm.interval);
+            vm.interval = setInterval(function () {
+                vm.effect = !vm.effect;
+            }, 1000);
         }
     }
 });
