@@ -17,17 +17,17 @@
             <div id="effect" :class="effect ? 'highlight' : 'shrink'"></div>
         </div>
         <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
-        <div>I got no class :(</div>
+        <div :class="[color, width]">I got no class :(</div>
         <!-- 3) Let the user enter a class (create some example classes) and attach it -->
         <div>
-            <input type="text">
-            <div></div>
+            <input type="text" v-model="input1">
+            <div :class="input1"></div>
         </div>
         <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
         <div>
-            <input type="text">
-            <input type="text">
-            <div></div>
+            <input type="text" v-model="input2">
+            <input type="checkbox" v-model="flag2">
+            <div :class="{input2: flag2}"></div>
         </div>
         <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
         <div>
