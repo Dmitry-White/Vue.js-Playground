@@ -1,6 +1,11 @@
 new Vue({
     el: '#app',
     data: {
-        name: 'Dmitry'
+        link: 'http://google.com'
+    },
+    methods: {
+        changeLink: function () {
+            this.link = 'http://apple.com'
+        }
     }
 });
