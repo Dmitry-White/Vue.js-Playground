@@ -2,6 +2,7 @@ new Vue({
   el: '#exercise',
   data: {
     show: true,
+    isArray: false,
     array: ['Max', 'Anna', 'Chris', 'Manu'],
     myObject: {
       title: 'Lord of the Rings',
