@@ -17,7 +17,7 @@
           <label for="email">Email</label>
           <input type="email" v-model:value="email" class="form-control form-control-lg">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" @click="process" class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>
@@ -30,6 +30,12 @@
       data: {
         name: 'Hello World!',
         email: 'test@test.com'
+      },
+      methods: {
+        process(e) {
+          e.preventDefault();
+          console.log('Submit: ', this.email);
+        }
       }
     });
   </script>
