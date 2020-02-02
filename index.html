@@ -30,9 +30,9 @@
       <h2 v-show="submitted" v-cloak class="mt-5">Thanks for signing up!</h2>
 
       <div class="card mt-5">
-        <img :src="imgSrc" class="card-img-top" :alt="imgTitle">
+        <img :src="photo.imgSrc" class="card-img-top" :alt="photo.imgTitle">
         <div class="card-body">
-          <h5 class="card-title">{{imgTitle}}</h5>
+          <h5 class="card-title">{{photo.imgTitle}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
             content.</p>
           <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -52,11 +52,15 @@
         email: 'test@test.com',
         submitted: false,
 
-        imgSrc: '',
-        imgTitle: ''
+        photo: {
+          imgSrc: '',
+          imgTitle: '',
+        },
+        album: [],
       },
       created() {
-        this.fetchPhotos();
+        this.fetchPhoto();
+        this.fetchList();
       },
       methods: {
         process(e) {
@@ -64,12 +68,21 @@
           console.log('Submit: ', this.email);
           this.submitted = true;
         },
-        fetchPhotos() {
+        fetchPhoto() {
           axios.get('https://jsonplaceholder.typicode.com/photos')
             .then((data) => {
-              console.log(data);
-              app.imgSrc = data.data[0].url;
-              app.imgTitle = data.data[0].title;
+              this.photo = {
+                imgSrc: data.data[0].url,
+                imgTitle: data.data[0].title,
+              }
+            })
+            .catch((err) => console.log(err))
+        },
+        fetchList() {
+          axios.get('https://jsonplaceholder.typicode.com/albums')
+            .then((data) => {
+              const album = data.data.slice(0, 10);
+              this.album = album;
             })
             .catch((err) => console.log(err))
         }
