@@ -16,7 +16,7 @@
 
 <body>
   <div id='app'>
-    <div class="container">
+    <div class="container p-3">
       <h1 v-cloak>{{name}}</h1>
 
       <form v-show="!submitted" class="mt-5">
@@ -29,7 +29,7 @@
 
       <h2 v-show="submitted" v-cloak class="mt-5">Thanks for signing up!</h2>
 
-      <div class="card mt-5">
+      <div class="card mt-5" v-cloak>
         <img :src="photo.imgSrc" class="card-img-top" :alt="photo.imgTitle">
         <div class="card-body">
           <h5 class="card-title">{{photo.imgTitle}}</h5>
@@ -38,6 +38,15 @@
           <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
+
+      <ul class="list-group mt-5" v-cloak>
+        <li class="list-group-item" v-for="song in album" :key="song.id">
+          {{song.title}}
+          <button @click="removeSong(song.id)" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -71,7 +80,7 @@
         fetchPhoto() {
           axios.get('https://jsonplaceholder.typicode.com/photos')
             .then((data) => {
-              this.photo = {
+              app.photo = {
                 imgSrc: data.data[0].url,
                 imgTitle: data.data[0].title,
               }
@@ -82,9 +91,12 @@
           axios.get('https://jsonplaceholder.typicode.com/albums')
             .then((data) => {
               const album = data.data.slice(0, 10);
-              this.album = album;
+              app.album = album;
             })
             .catch((err) => console.log(err))
+        },
+        removeSong(index) {
+          this.album = this.album.filter(song => song.id !== index);
         }
       }
     });
