@@ -55,22 +55,26 @@
         imgSrc: '',
         imgTitle: ''
       },
+      created() {
+        this.fetchPhotos();
+      },
       methods: {
         process(e) {
           e.preventDefault();
           console.log('Submit: ', this.email);
           this.submitted = true;
+        },
+        fetchPhotos() {
+          axios.get('https://jsonplaceholder.typicode.com/photos')
+            .then((data) => {
+              console.log(data);
+              app.imgSrc = data.data[0].url;
+              app.imgTitle = data.data[0].title;
+            })
+            .catch((err) => console.log(err))
         }
       }
     });
-
-    axios.get('https://jsonplaceholder.typicode.com/photos')
-      .then((data) => {
-        console.log(data);
-        app.imgSrc = data.data[0].url;
-        app.imgTitle = data.data[0].title;
-      })
-      .catch((err) => console.log(err))
   </script>
 </body>
 
