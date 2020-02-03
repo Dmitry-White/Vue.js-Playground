@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue Playground</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <style>
     [v-cloak] {
       display: none;
@@ -27,10 +28,21 @@
       </form>
 
       <h2 v-show="submitted" v-cloak class="mt-5">Thanks for signing up!</h2>
+
+      <div class="card mt-5">
+        <img :src="imgSrc" class="card-img-top" :alt="imgTitle">
+        <div class="card-body">
+          <h5 class="card-title">{{imgTitle}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <script>
     const app = new Vue({
@@ -39,6 +51,9 @@
         name: 'Hello World!',
         email: 'test@test.com',
         submitted: false,
+
+        imgSrc: '',
+        imgTitle: ''
       },
       methods: {
         process(e) {
@@ -48,6 +63,14 @@
         }
       }
     });
+
+    axios.get('https://jsonplaceholder.typicode.com/photos')
+      .then((data) => {
+        console.log(data);
+        app.imgSrc = data.data[0].url;
+        app.imgTitle = data.data[0].title;
+      })
+      .catch((err) => console.log(err))
   </script>
 </body>
 
