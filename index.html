@@ -39,9 +39,9 @@
         </div>
       </div>
 
-      <h2 class="mt-5" v-cloak v-if="album.length">
+      <h2 class="mt-5" v-cloak v-if="numSongs">
         Songs:
-        <span class="badge badge-secondary">{{album.length}}</span>
+        <span class="badge badge-secondary">{{numSongs}}</span>
       </h2>
       <ul class="list-group mt-2" v-cloak>
         <li class="list-group-item" v-for="song in album" :key="song.id">
@@ -70,6 +70,11 @@
           imgTitle: '',
         },
         album: [],
+      },
+      computed: {
+        numSongs() {
+          return this.album.length;
+        }
       },
       created() {
         this.fetchPhoto();
