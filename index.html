@@ -11,6 +11,16 @@
     [v-cloak] {
       display: none;
     }
+
+    .fade-leave-to,
+    .fade-enter {
+      opacity: 0;
+    }
+
+    .fade-leave-active,
+    .fade-enter-active {
+      transition: all .5s ease;
+    }
   </style>
 </head>
 
@@ -39,13 +49,16 @@
         </div>
       </div>
 
-      <h2 class="mt-5" v-cloak v-if="numSongs && showSummary">
-        Songs:
-        <span class="badge badge-secondary">{{numSongs}}</span>
-      </h2>
+      <transition name="fade">
+        <h2 class="mt-5" v-cloak v-if="numSongs && showSummary">
+          Songs:
+          <span class="badge badge-secondary">{{numSongs}}</span>
+        </h2>
+      </transition>
       <button type="button" class="btn btn-info" @click="showSummary = !showSummary">Summary</button>
       <ul class="list-group mt-2" v-cloak>
-        <li :class="{'list-group-item-secondary': isOdd(song.id)}" class="list-group-item" v-for="song in album" :key="song.id">
+        <li :class="{'list-group-item-secondary': isOdd(song.id)}" class="list-group-item" v-for="song in album"
+          :key="song.id">
           {{song.title}}
           <button @click="removeSong(song.id)" type="button" class="close" aria-label="Close">
             <span aria-hidden="true">&times;</span>
