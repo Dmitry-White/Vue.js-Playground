@@ -29,7 +29,7 @@
 
       <h2 v-show="submitted" v-cloak class="mt-5">Thanks for signing up!</h2>
 
-      <div class="card mt-5" v-cloak>
+      <div class="card mt-5" :class="{'mb-5': !showSummary}" v-cloak>
         <img :src="photo.imgSrc" class="card-img-top" :alt="photo.imgTitle">
         <div class="card-body">
           <h5 class="card-title">{{photo.imgTitle}}</h5>
@@ -39,10 +39,11 @@
         </div>
       </div>
 
-      <h2 class="mt-5" v-cloak v-if="numSongs">
+      <h2 class="mt-5" v-cloak v-if="numSongs && showSummary">
         Songs:
         <span class="badge badge-secondary">{{numSongs}}</span>
       </h2>
+      <button type="button" class="btn btn-info" @click="showSummary = !showSummary">Summary</button>
       <ul class="list-group mt-2" v-cloak>
         <li :class="{'list-group-item-secondary': isOdd(song.id)}" class="list-group-item" v-for="song in album" :key="song.id">
           {{song.title}}
@@ -70,6 +71,7 @@
           imgTitle: '',
         },
         album: [],
+        showSummary: true
       },
       computed: {
         numSongs() {
