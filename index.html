@@ -39,7 +39,11 @@
         </div>
       </div>
 
-      <ul class="list-group mt-5" v-cloak>
+      <h2 class="mt-5" v-cloak v-if="album.length">
+        Songs:
+        <span class="badge badge-secondary">{{album.length}}</span>
+      </h2>
+      <ul class="list-group mt-2" v-cloak>
         <li class="list-group-item" v-for="song in album" :key="song.id">
           {{song.title}}
           <button @click="removeSong(song.id)" type="button" class="close" aria-label="Close">
