@@ -44,7 +44,7 @@
         <span class="badge badge-secondary">{{numSongs}}</span>
       </h2>
       <ul class="list-group mt-2" v-cloak>
-        <li class="list-group-item" v-for="song in album" :key="song.id">
+        <li :class="{'list-group-item-secondary': isOdd(song.id)}" class="list-group-item" v-for="song in album" :key="song.id">
           {{song.title}}
           <button @click="removeSong(song.id)" type="button" class="close" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -106,6 +106,9 @@
         },
         removeSong(index) {
           this.album = this.album.filter(song => song.id !== index);
+        },
+        isOdd(index) {
+          return index % 2;
         }
       }
     });
