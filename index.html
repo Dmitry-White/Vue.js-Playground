@@ -7,21 +7,7 @@
   <title>Vue Playground</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <style>
-    [v-cloak] {
-      display: none;
-    }
-
-    .fade-leave-to,
-    .fade-enter {
-      opacity: 0;
-    }
-
-    .fade-leave-active,
-    .fade-enter-active {
-      transition: all .5s ease;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -29,7 +15,7 @@
     <div class="container p-3">
       <sign-up-form v-show="!submitted" :process="process"></sign-up-form>
 
-      <sign-up-thanks v-show="submitted" :process="process"></sign-up-thanks>
+      <sign-up-message v-show="submitted" :process="process"></sign-up-message>
 
       <image-card :show-summary="showSummary"></image-card>
 
@@ -43,166 +29,12 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <script>
-    Vue.component('sign-up-form', {
-      template: `
-        <form class="mt-5">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              v-model:value="email"
-              class="form-control form-control-lg"
-            >
-          </div>
-          <button
-            type="submit"
-            @click="process"
-            class="btn btn-primary"
-          >
-            Submit
-          </button>
-        </form>
-      `,
-      props: ['process'],
-      data: () => ({
-        name: 'Hello World!',
-        email: 'test@test.com',
-      }),
-    });
-
-    Vue.component('sign-up-thanks', {
-      template: '<h2 v-cloak class="mt-5">Thanks for signing up!</h2>'
-    });
-
-    Vue.component('image-card', {
-      template: `
-        <div class="card mt-5" :class="{'mb-5': !showSummary}" v-cloak>
-          <img :src="photo.imgSrc" class="card-img-top" :alt="photo.imgTitle">
-          <div class="card-body">
-            <h5 class="card-title">{{photo.imgTitle}}</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and
-              make up the bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      `,
-      props: ['showSummary'],
-      data: () => ({
-        photo: {
-          imgSrc: '',
-          imgTitle: '',
-        },
-      }),
-      created() {
-        this.fetchPhoto();
-      },
-      methods: {
-        fetchPhoto() {
-          const self = this;
-          axios.get('https://jsonplaceholder.typicode.com/photos')
-            .then((data) => {
-              self.photo = {
-                imgSrc: data.data[0].url,
-                imgTitle: data.data[0].title,
-              }
-            })
-            .catch((err) => console.log(err))
-        },
-      }
-    });
-
-    Vue.component('album-summary', {
-      template: `
-        <div>
-          <transition name="fade">
-            <h2 class="mt-5" v-cloak v-if="numSongs && showSummary">
-              Songs:
-              <span class="badge badge-secondary">{{numSongs}}</span>
-            </h2>
-          </transition>
-          <button type="button" class="btn btn-info" @click="summaryHandler">
-            Summary
-          </button>
-        </div>
-      `,
-      props: ['showSummary', 'summaryHandler', 'numSongs'],
-    });
-
-    Vue.component('album-listing', {
-      template: `
-        <ul class="list-group mt-2" v-cloak>
-          <li
-            v-for="song in album"
-            :class="{'list-group-item-secondary': isOdd(song.id)}"
-            class="list-group-item"
-            :key="song.id"
-          >
-            {{song.title}}
-            <button 
-              @click="removeSong(song.id)"
-              type="button"
-              class="close"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </li>
-        </ul>
-      `,
-      props: ['album', 'albumHandler'],
-      created() {
-        this.fetchList();
-      },
-      methods: {
-        fetchList() {
-          const self = this;
-          axios.get('https://jsonplaceholder.typicode.com/albums')
-            .then((data) => {
-              const album = data.data.slice(0, 10);
-              this.albumHandler(album);
-            })
-            .catch((err) => console.log(err))
-        },
-        removeSong(index) {
-          const updatedAlbum = this.album.filter(song => song.id !== index);
-          this.albumHandler(updatedAlbum);
-        },
-        isOdd(index) {
-          return index % 2;
-        }
-      }
-    });
-
-    const app = new Vue({
-      el: '#app',
-      data: {
-        submitted: false,
-        showSummary: true,
-        album: [],
-      },
-      computed: {
-        numSongs() {
-          return this.album.length;
-        }
-      },
-      methods: {
-        process(e) {
-          e.preventDefault();
-          this.submitted = true;
-        },
-        summaryHandler() {
-          this.showSummary = !this.showSummary
-        },
-        albumHandler(album) {
-          this.album = album;
-        }
-      }
-    });
-
-  </script>
+  <script src="SignUpForm.js"></script>
+  <script src="SignUpMessage.js"></script>
+  <script src="ImageCard.js"></script>
+  <script src="AlbumSummary.js"></script>
+  <script src="AlbumListing.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>
