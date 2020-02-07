@@ -7,9 +7,9 @@ Vue.component('album-summary', {
           <span class="badge badge-secondary">{{numSongs}}</span>
         </h2>
       </transition>
-      <button type="button" class="btn btn-info" @click="summaryHandler">
+      <custom-button type="button" extraClass="btn-info" :handler="summaryHandler">
         Summary
-      </button>
+      </custom-button>
     </div>
   `,
   props: ['showSummary', 'summaryHandler', 'numSongs'],

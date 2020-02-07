@@ -15,7 +15,9 @@
     <div class="container p-3">
       <sign-up-form v-show="!submitted" :process="process"></sign-up-form>
 
-      <sign-up-message v-show="submitted" :process="process"></sign-up-message>
+      <sign-up-message v-show="submitted" :process="process">
+        Thanks for signing up!
+      </sign-up-message>
 
       <image-card :show-summary="showSummary"></image-card>
 
@@ -29,6 +31,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+  <script src="CustomButton.js"></script>
   <script src="SignUpForm.js"></script>
   <script src="SignUpMessage.js"></script>
   <script src="ImageCard.js"></script>

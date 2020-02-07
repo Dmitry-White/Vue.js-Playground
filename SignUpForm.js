@@ -9,13 +9,9 @@ Vue.component('sign-up-form', {
           class="form-control form-control-lg"
         >
       </div>
-      <button
-        type="submit"
-        @click="process"
-        class="btn btn-primary"
-      >
+      <custom-button type="submit" extraClass="btn-primary" :handler="process">
         Submit
-      </button>
+      </custom-button>
     </form>
   `,
   props: ['process'],
