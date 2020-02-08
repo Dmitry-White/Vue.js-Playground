@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const ImageCard = {
   props: ["showSummary"],
@@ -23,11 +23,10 @@ const ImageCard = {
   },
   methods: {
     fetchPhoto() {
-      const self = this;
       axios
         .get("https://jsonplaceholder.typicode.com/photos")
         .then(data => {
-          self.photo = {
+          this.photo = {
             imgSrc: data.data[0].url,
             imgTitle: data.data[0].title
           };

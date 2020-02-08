@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const AlbumListing = {
   props: ["album", "albumHandler"],
