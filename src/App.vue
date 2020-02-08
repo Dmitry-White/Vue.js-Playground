@@ -1,19 +1,69 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container p-3">
+      <SignUpForm v-show="!submitted" :process="process"></SignUpForm>
+
+      <SignUpMessage v-show="submitted" :process="process">
+        Thanks for signing up!
+      </SignUpMessage>
+
+      <ImageCard :show-summary="showSummary"></ImageCard>
+
+      <AlbumSummary
+        :show-summary="showSummary"
+        :summary-handler="summaryHandler"
+        :num-songs="numSongs"
+      >
+      </AlbumSummary>
+
+      <AlbumListing :album="album" :album-handler="albumHandler"></AlbumListing>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {
+  AlbumListing,
+  AlbumSummary,
+  ImageCard,
+  SignUpForm,
+  SignUpMessage
+} from "./components";
 
-export default {
-  name: 'App',
+const App = {
+  name: "App",
   components: {
-    HelloWorld
+    AlbumListing,
+    AlbumSummary,
+    ImageCard,
+    SignUpForm,
+    SignUpMessage
+  },
+  data: () => ({
+    submitted: false,
+    showSummary: true,
+    album: []
+  }),
+  computed: {
+    numSongs() {
+      return this.album.length;
+    }
+  },
+  methods: {
+    process(e) {
+      e.preventDefault();
+      this.submitted = true;
+    },
+    summaryHandler() {
+      this.showSummary = !this.showSummary;
+    },
+    albumHandler(album) {
+      this.album = album;
+    }
   }
-}
+};
+
+export default App;
 </script>
 
 <style>
@@ -24,5 +74,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+[v-cloak] {
+  display: none;
+}
+
+.fade-leave-to,
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-leave-active,
+.fade-enter-active {
+  transition: all 0.5s ease;
 }
 </style>
