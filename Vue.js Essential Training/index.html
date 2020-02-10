@@ -23,7 +23,10 @@
       </div>
     </nav>
 
-    <h1>{{name}}</h1>
+    <div class="form-inline mr-auto mt-5">
+      <label for="formMax" class="font-weight-bold mr-2">Max</label>
+      <input type="text" id="formMax" class="form-control w-25" v-model="maximum">
+    </div>
   </div>
 
   <!-- Optional JavaScript -->
@@ -42,7 +45,8 @@
     const app = new Vue({
       el: "#app",
       data: {
-        name: "Bamboo Thermal Ski Coat"
+        name: "Bamboo Thermal Ski Coat",
+        maximum: 99,
       }
     });
   </script>
