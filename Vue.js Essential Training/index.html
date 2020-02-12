@@ -16,10 +16,10 @@
 <body class="container mt-4">
   <div id="app">
 
-    <nav class="navbar navbar-light bg-light fixed-top" v-if="cart.length > 0">
+    <nav class="navbar navbar-light bg-light fixed-top" v-if="countItems(cart)">
       <div class="navbar-text ml-auto">
         <b>Cart: </b>
-        <span class="badge badge-pill badge-success">{{ cart.length }}</span>
+        <span class="badge badge-pill badge-success">{{ countItems(cart) }}</span>
       </div>
     </nav>
 
@@ -32,7 +32,7 @@
 
     <div class="row d-flex mb-3 align-items-center mt-5" v-for="item in products" v-if="isLess(item.price)">
       <div class="col-1 m-auto">
-        <button class="btn btn-info" @click="cart.push(item)">+</button>
+        <button class="btn btn-info" @click="addItem(item)">+</button>
       </div>
 
       <div class="col-sm-4">
@@ -77,6 +77,12 @@
       methods: {
         isLess(price) {
           return price <= this.maximum;
+        },
+        countItems(arr) {
+          return arr.length
+        },
+        addItem(item) {
+          this.cart.push(item)
         }
       },
     });
