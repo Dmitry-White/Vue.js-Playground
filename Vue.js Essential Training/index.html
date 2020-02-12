@@ -28,11 +28,9 @@
       <input type="text" id="formMax" class="form-control w-25" v-model="maximum">
     </div>
 
-    <div
-      class="row d-flex mb-3 align-items-center mt-5"
-      v-for="item in products"
-      v-if="isLess(item.price)"
-    >
+    <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
+
+    <div class="row d-flex mb-3 align-items-center mt-5" v-for="item in products" v-if="isLess(item.price)">
       <div class="col-sm-4">
         <img class="img-fluid d-block" :src="item.image" :alt="item.name">
       </div>
