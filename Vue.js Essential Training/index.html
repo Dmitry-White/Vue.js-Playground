@@ -16,27 +16,27 @@
 <body class="container mt-4">
   <div id="app">
 
-    <nav class="navbar navbar-light bg-light fixed-top" v-if="countItems(cart)">
+    <nav id="nav-block" class="navbar navbar-light bg-light fixed-top" v-if="countItems(cart)">
       <div class="navbar-text ml-auto">
         <b>Cart: </b>
         <span class="badge badge-pill badge-success">{{ countItems(cart) }}</span>
       </div>
     </nav>
 
-    <section class="form-inline mr-auto mt-5">
+    <section id="max-block" class="form-inline mr-auto mt-5">
       <label for="formMax" class="font-weight-bold mr-2">Max</label>
       <input type="text" id="formMax" class="form-control w-25" v-model="maximum">
     </section>
 
     <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
 
-    <section>
+    <section id="slug-block">
       <label for="formSlug" class="font-weight-bold mr-2">Slugetize</label>
       <input id="formSlug" type="text" class="form-control" v-model="slugText">
-      <p class="font-weight-bold text-danger">{{ slugText }}</p>
+      <p class="font-weight-bold text-danger">{{ slugetize }}</p>
     </section>
 
-    <section class="row d-flex mb-3 align-items-center mt-5" v-for="item in products" v-if="isLess(item.price)">
+    <section id="items-block" class="row d-flex mb-3 align-items-center mt-5" v-for="item in products" v-if="isLess(item.price)">
       <div class="col-1 m-auto">
         <button class="btn btn-info" @click="addItem(item)">+</button>
       </div>
@@ -77,6 +77,14 @@
     const app = new Vue({
       el: "#app",
       data,
+      computed: {
+        slugetize() {
+          return this.slugText
+            .toLowerCase()
+            .replace(/[^\w ]+/g, '')
+            .replace(/ +/g, '-');
+        }
+      },
       mounted() {
         fetch('http://hplussport.com/api/products/order/price')
           .then((res) => res.json())
