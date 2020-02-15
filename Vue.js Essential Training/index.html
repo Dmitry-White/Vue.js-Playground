@@ -23,14 +23,20 @@
       </div>
     </nav>
 
-    <div class="form-inline mr-auto mt-5">
+    <section class="form-inline mr-auto mt-5">
       <label for="formMax" class="font-weight-bold mr-2">Max</label>
       <input type="text" id="formMax" class="form-control w-25" v-model="maximum">
-    </div>
+    </section>
 
     <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
 
-    <div class="row d-flex mb-3 align-items-center mt-5" v-for="item in products" v-if="isLess(item.price)">
+    <section>
+      <label for="formSlug" class="font-weight-bold mr-2">Slugetize</label>
+      <input id="formSlug" type="text" class="form-control" v-model="slugText">
+      <p class="font-weight-bold text-danger">{{ slugText }}</p>
+    </section>
+
+    <section class="row d-flex mb-3 align-items-center mt-5" v-for="item in products" v-if="isLess(item.price)">
       <div class="col-1 m-auto">
         <button class="btn btn-info" @click="addItem(item)">+</button>
       </div>
@@ -44,7 +50,8 @@
         <p class="mb-0">{{ item.description }}</p>
         <div class="h5 float-right">{{ item.price }}</div>
       </div>
-    </div>
+    </section>
+
   </div>
 
   <!-- Optional JavaScript -->
@@ -59,11 +66,13 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
   <script>
     const data = {
       maximum: 50,
       products: null,
-      cart: []
+      cart: [],
+      slugText: 'test'
     }
     const app = new Vue({
       el: "#app",
