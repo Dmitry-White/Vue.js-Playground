@@ -24,15 +24,15 @@
     </nav>
 
     <h1>My Shop</h1>
-    
-    <section id="max-block" class="d-flex align-items-center">
-      <label for="formMax" :class="['font-weight-bold', 'mr-2']">Max</label>
+
+    <section id="max-block" class="align-items-center" :class="sliderState">
+      <label for="formMax" :class="labelArr">Max</label>
       <input 
         type="text"
         id="formMax"
         class="form-control mx-2"
         :style="{
-          'width': '60px',
+          'width': `${inputWidth}px`,
           'text-align': 'center'
         }"
         v-model="maximum"
@@ -83,7 +83,10 @@
       maximum: 50,
       products: null,
       cart: [],
-      slugText: 'test'
+      slugText: 'test',
+      labelArr: ['font-weight-bold', 'mr-2'],
+      inputWidth: 70,
+      sliderStatus: true,
     }
     const app = new Vue({
       el: "#app",
@@ -98,6 +101,9 @@
             .replace(/[^\w ]+/g, '')
             .replace(/ +/g, '-')
             + ` ${this.timeStatic} / ${this.timeDynamic()}` ;
+        },
+        sliderState() {
+          return this.sliderStatus ? 'd-flex' : 'd-none'
         }
       },
       mounted() {
