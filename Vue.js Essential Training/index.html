@@ -23,12 +23,22 @@
       </div>
     </nav>
 
-    <section id="max-block" class="form-inline mr-auto mt-5">
-      <label for="formMax" class="font-weight-bold mr-2">Max</label>
-      <input type="text" id="formMax" class="form-control w-25" v-model="maximum">
+    <h1>My Shop</h1>
+    
+    <section id="max-block" class="d-flex align-items-center">
+      <label for="formMax" :class="['font-weight-bold', 'mr-2']">Max</label>
+      <input 
+        type="text"
+        id="formMax"
+        class="form-control mx-2"
+        :style="{
+          'width': '60px',
+          'text-align': 'center'
+        }"
+        v-model="maximum"
+      >
+      <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
     </section>
-
-    <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
 
     <section id="slug-block">
       <label for="formSlug" class="font-weight-bold mr-2">Slugetize</label>
