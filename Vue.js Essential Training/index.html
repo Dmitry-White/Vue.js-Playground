@@ -16,10 +16,15 @@
 <body class="container mt-4">
   <div id="app">
 
-    <nav id="nav-block" class="navbar navbar-light bg-light fixed-top" v-if="countItems(cart)">
-      <div class="navbar-text ml-auto">
-        <b>Cart: </b>
-        <span class="badge badge-pill badge-success">{{ countItems(cart) }}</span>
+    <nav id="nav-block" class="navbar navbar-light fixed-top">
+      <div class="navbar-text ml-auto d-flex">
+        <button class="btn btn-sm btn-outline-success" @click="sliderStatus = !sliderStatus">
+          <i class="fas fa-dollar-sign"></i>
+        </button>
+        <div class="ml-2" v-if="countItems(cart)">
+          <b>Cart: </b>
+          <span class="badge badge-pill badge-success">{{ countItems(cart) }}</span>
+        </div>
       </div>
     </nav>
 
@@ -27,16 +32,10 @@
 
     <section id="max-block" class="align-items-center" :class="sliderState">
       <label for="formMax" :class="labelArr">Max</label>
-      <input 
-        type="text"
-        id="formMax"
-        class="form-control mx-2"
-        :style="{
+      <input type="text" id="formMax" class="form-control mx-2" :style="{
           'width': `${inputWidth}px`,
           'text-align': 'center'
-        }"
-        v-model="maximum"
-      >
+        }" v-model="maximum">
       <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
     </section>
 
@@ -77,6 +76,7 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://kit.fontawesome.com/1426cc8134.js" crossorigin="anonymous"></script>
 
   <script>
     const data = {
@@ -100,7 +100,7 @@
             .toLowerCase()
             .replace(/[^\w ]+/g, '')
             .replace(/ +/g, '-')
-            + ` ${this.timeStatic} / ${this.timeDynamic()}` ;
+            + ` ${this.timeStatic} / ${this.timeDynamic()}`;
         },
         sliderState() {
           return this.sliderStatus ? 'd-flex' : 'd-none'
