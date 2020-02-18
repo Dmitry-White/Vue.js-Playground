@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="style.css">
+
   <title>Vue.js Essential Training</title>
 </head>
 
@@ -29,15 +31,18 @@
     </nav>
 
     <h1>My Shop</h1>
-
-    <section id="max-block" class="align-items-center" :class="sliderState">
-      <label for="formMax" :class="labelArr">Max</label>
-      <input type="text" id="formMax" class="form-control mx-2" :style="{
-          'width': `${inputWidth}px`,
-          'text-align': 'center'
-        }" v-model="maximum">
-      <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
-    </section>
+    <transition name="fade">
+      <div v-if="sliderStatus">
+        <section id="max-block" class="align-items-center" :class="sliderState">
+          <label for="formMax" :class="labelArr">Max</label>
+          <input type="text" id="formMax" class="form-control mx-2" :style="{
+              'width': `${inputWidth}px`,
+              'text-align': 'center'
+            }" v-model="maximum">
+          <input type="range" class="custom-range" min="0" max="200" v-model="maximum">
+        </section>
+      </div>
+    </transition>
 
     <section id="slug-block">
       <label for="formSlug" class="font-weight-bold mr-2">Slugetize</label>
