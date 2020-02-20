@@ -6,7 +6,13 @@ const data = {
   labelArr: ['font-weight-bold', 'mr-2'],
   inputWidth: 70,
   sliderStatus: true,
-}
+};
+
+Vue.filter('currency', function (price) {
+  const formattedPrice = Number.parseFloat(price).toFixed(2);
+  return `$${formattedPrice}`;
+})
+
 const app = new Vue({
   el: "#app",
   data,
