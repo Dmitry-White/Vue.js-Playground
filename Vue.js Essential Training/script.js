@@ -38,8 +38,22 @@ const methods = {
   countItems(arr) {
     return arr.length
   },
-  addItem(item) {
-    this.cart.push(item)
+  addItem(product) {
+    let whichProduct;
+    const existing = this.cart.filter((item, index) => {
+      if (item.product.id === product.id) {
+        whichProduct = index;
+        return true
+      } else {
+        return false
+      }
+    });
+
+    if (existing.length) {
+      this.cart[whichProduct].qty++;
+    } else {
+      this.cart.push({ product, qty: 1 })
+    }
   },
   getTime() {
     const data = new Date();
