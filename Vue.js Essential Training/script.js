@@ -72,6 +72,13 @@ const methods = {
       this.cart.push({ product, qty: 1 })
     }
   },
+  deleteItem(id) {
+    if (this.cart[id].qty > 1) {
+      this.cart[id].qty--;
+    } else {
+      this.cart.splice(id, 1);
+    }
+  },
   getTime() {
     const data = new Date();
     return `${data.getHours()}:${data.getMinutes()}:${data.getSeconds()}`;

@@ -42,7 +42,7 @@
                   <span class="badge badge-pill badge-warning align-text-top mr-1">{{item.qty}}</span>
                   {{item.product.name}}
                   <b>{{item.product.price | currency}}</b>
-                  <a href="#" @click="deleteItem(index)" class="badge badge-danger text-white">-</a>
+                  <a href="#" @click.stop="deleteItem(index)" class="badge badge-danger text-white">-</a>
                 </div>
               </div>
 
