@@ -30,8 +30,9 @@
           <div class="dropdown ml-2" v-if="countItems(cart)">
             <button class="btn btn-success btn-sm dropdown-toggle" id="cartDropdown" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              <b>Cart: </b>
-              <span class="badge badge-pill badge-success">{{ countItems(cart) }}</span>
+              <i class="fas fa-shopping-cart mx-2"></i>
+              <span class="badge badge-pill badge-light">{{ cartQty }}</span>
+              <b>{{ cartTotal | currency }}</b>
             </button>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="cartDropdown">
