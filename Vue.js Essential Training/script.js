@@ -21,6 +21,23 @@ const computed = {
   },
   sliderState() {
     return this.sliderStatus ? 'd-flex' : 'd-none'
+  },
+  cartTotal() {
+    let sum = 0;
+    for (key in this.cart) {
+      const itemPrice = this.cart[key].product.price;
+      const itemQty = this.cart[key].qty;
+      sum += itemPrice * itemQty;
+    }
+    return sum;
+  },
+  cartQty() {
+    let qty = 0;
+    for (key in this.cart) {
+      const itemQty = this.cart[key].qty;
+      qty += itemQty;
+    }
+    return qty;
   }
 };
 
