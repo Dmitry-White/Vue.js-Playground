@@ -94,13 +94,7 @@ Vue.filter('currency', function (price) {
 })
 
 Vue.component('price', {
-  data() {
-    return {
-      prefix: '$',
-      value: 23.222,
-      precision: 2,
-    }
-  },
+  props: ['prefix', 'value', 'precision'],
   template: '<span>{{ `${this.prefix}${Number.parseFloat(this.value).toFixed(this.precision)}` }}</span>'
 });
 
