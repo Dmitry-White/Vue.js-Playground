@@ -93,6 +93,18 @@ Vue.filter('currency', function (price) {
   return `$${formattedPrice}`;
 })
 
+Vue.component('price', {
+  data() {
+    return {
+      prefix: '$',
+      value: 23.222,
+      precision: 2,
+    }
+  },
+  template: '<span>{{ `${this.prefix}${Number.parseFloat(this.value).toFixed(this.precision)}` }}</span>'
+});
+
+
 const app = new Vue({
   el: "#app",
   data,
