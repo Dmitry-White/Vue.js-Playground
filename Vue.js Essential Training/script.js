@@ -103,6 +103,45 @@ Vue.component('price', {
   template: '<span>{{ `${this.prefix}${Number.parseFloat(this.value).toFixed(this.precision)}` }}</span>'
 });
 
+Vue.component('product-list', {
+  props: {
+    products: {
+      type: Array,
+      default: [],
+    },
+    maximum: {
+      type: Number,
+      default: 50,
+    }
+  },
+  template: `
+    <transition-group name="fade" tag="div">
+      <section id="items-block" class="row d-flex mb-3 align-items-center mt-5" v-for="item in products"
+        v-if="isLess(item.price)" :key="item.id">
+        <div class="col-1 m-auto">
+          <button class="btn btn-info" @click="addItem(item)">+</button>
+        </div>
+
+        <div class="col-sm-4">
+          <img class="img-fluid d-block" :src="item.image" :alt="item.name">
+        </div>
+
+        <div class="col">
+          <h3 class="text-info">{{ item.name }}</h3>
+          <p class="mb-0">{{ item.description }}</p>
+          <price class="h5 float-right" :prefix="'&euro;'" :value="Number(item.price)" :precision="2"></price>
+        </div>
+      </section>
+    </transition-group>
+  `,
+  methods: {
+    isLess(price) {
+      console.log('!!')
+      return price <= this.maximum;
+    },
+  }
+});
+
 
 const app = new Vue({
   el: "#app",
