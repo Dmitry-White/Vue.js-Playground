@@ -119,7 +119,7 @@ Vue.component('product-list', {
       <section id="items-block" class="row d-flex mb-3 align-items-center mt-5" v-for="item in products"
         v-if="isLess(item.price)" :key="item.id">
         <div class="col-1 m-auto">
-          <button class="btn btn-info" @click="addItem(item)">+</button>
+          <button class="btn btn-info" @click="$emit('add', item)">+</button>
         </div>
 
         <div class="col-sm-4">
