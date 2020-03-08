@@ -3,7 +3,7 @@
     <h1>My Shop</h1>
     <p class="animated fadeInRight">Take a look at our offerings below</p>
     <FontAwesomeIcon icon="shopping-cart" />
-    <ProductList :products="products" :maximum="maximum" />
+    <ProductList :products="products" :maximum="maximum" @add="addItem" />
   </div>
 </template>
 
@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       products: [],
-      maximum: 50
+      maximum: 50,
+      cart: []
     };
   },
   mounted() {
@@ -29,6 +30,25 @@ export default {
   components: {
     FontAwesomeIcon,
     ProductList
+  },
+  methods: {
+    addItem(product) {
+      let whichProduct;
+      const existing = this.cart.filter((item, index) => {
+        if (item.product.id === product.id) {
+          whichProduct = index;
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (existing.length) {
+        this.cart[whichProduct].qty++;
+      } else {
+        this.cart.push({ product, qty: 1 });
+      }
+    }
   }
 };
 </script>
