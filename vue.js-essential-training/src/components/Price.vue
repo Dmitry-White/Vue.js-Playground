@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'Price',
   props: {
     prefix: { type: String, default: "$" },
     value: Number,
