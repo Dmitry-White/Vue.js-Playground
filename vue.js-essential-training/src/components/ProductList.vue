@@ -8,7 +8,9 @@
     >
       <div v-if="isLess(item.price)">
         <div class="col-1 m-auto">
-          <button class="btn btn-info" @click="$parent.$emit('add', item)">+</button>
+          <button class="btn btn-info" @click="$parent.$emit('add', item)">
+            +
+          </button>
         </div>
 
         <div class="col-sm-4">
@@ -31,6 +33,8 @@
 </template>
 
 <script>
+import { isLess } from "../utils";
+
 import Price from "./Price";
 
 export default {
@@ -38,9 +42,7 @@ export default {
   props: ["products", "maximum"],
   components: { Price },
   methods: {
-    isLess(price) {
-      return price <= this.maximum;
-    }
+    isLess
   }
 };
 </script>

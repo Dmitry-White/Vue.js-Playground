@@ -1,6 +1,7 @@
 <template>
   <section id="products">
     <h1>My Shop</h1>
+    
     <p class="animated fadeInRight">Take a look at our offerings below</p>
     <Navbar :cart="cart" />
     <PriceSlider :sliderStatus="sliderStatus" :maximum.sync="maximum" />

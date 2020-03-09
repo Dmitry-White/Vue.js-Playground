@@ -55,6 +55,8 @@
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+import { countItems,cartTotal } from "../utils";
+
 import Price from "./Price";
 
 export default {
@@ -65,15 +67,7 @@ export default {
     Price
   },
   computed: {
-    cartTotal() {
-      let sum = 0;
-      this.cart.forEach(item => {
-        const itemPrice = item.product.price;
-        const itemQty = item.qty;
-        sum += itemPrice * itemQty;
-      });
-      return sum;
-    },
+    cartTotal,
     cartQty() {
       let qty = 0;
       this.cart.forEach(item => {
@@ -84,9 +78,7 @@ export default {
     }
   },
   methods: {
-    countItems(arr) {
-      return arr.length;
-    }
+    countItems
   }
 };
 </script>

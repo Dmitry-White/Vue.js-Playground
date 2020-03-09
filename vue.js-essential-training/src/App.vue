@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="container mt-5">
+    <Checkout :cart="cart" @delete="deleteItem" @add="addItem" />
     <Products
       :cart="cart"
       :sliderStatus="sliderStatus"
@@ -14,11 +15,13 @@
 
 <script>
 import Products from "./components/Products";
+import Checkout from "./components/Checkout";
 
 export default {
   name: "App",
   components: {
-    Products
+    Products,
+    Checkout
   },
   data() {
     return {
