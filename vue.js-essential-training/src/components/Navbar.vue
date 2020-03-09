@@ -3,7 +3,7 @@
     <div class="navbar-text ml-auto d-flex">
       <button
         class="btn btn-sm btn-outline-success"
-        @click="$emit('toggle')"
+        @click="$parent.$emit('toggle')"
       >
         <FontAwesomeIcon icon="dollar-sign" />
       </button>
@@ -39,7 +39,7 @@
                 <Price :value="Number(item.product.price)" />
                 <a
                   href="#"
-                  @click.stop="$emit('delete', index)"
+                  @click.stop="$parent.$emit('delete', index)"
                   class="badge badge-danger text-white"
                   >-</a
                 >

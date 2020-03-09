@@ -1,24 +1,24 @@
 <template>
   <div id="app" class="container mt-5">
-    <h1>My Shop</h1>
-    <p class="animated fadeInRight">Take a look at our offerings below</p>
-    <Navbar :cart="cart" @toggle="toggleStatus" @delete="deleteItem" />
-    <PriceSlider :sliderStatus="sliderStatus" :maximum.sync="maximum" />
-    <ProductList :products="products" :maximum="maximum" @add="addItem" />
+    <Products
+      :cart="cart"
+      :sliderStatus="sliderStatus"
+      :products="products"
+      :maximum.sync="maximum"
+      @toggle="toggleStatus"
+      @delete="deleteItem"
+      @add="addItem"
+    />
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Navbar";
-import PriceSlider from "./components/PriceSlider";
-import ProductList from "./components/ProductList";
+import Products from "./components/Products";
 
 export default {
   name: "App",
   components: {
-    Navbar,
-    PriceSlider,
-    ProductList
+    Products
   },
   data() {
     return {
