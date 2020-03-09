@@ -2,20 +2,24 @@
   <div id="app" class="container mt-5">
     <h1>My Shop</h1>
     <p class="animated fadeInRight">Take a look at our offerings below</p>
-    <FontAwesomeIcon icon="shopping-cart" />
-    <PriceSlider :sliderStatus="sliderStatus" :maximum.sync="maximum"/>
+    <Navbar :cart="cart" @toggle="toggleStatus" @delete="deleteItem" />
+    <PriceSlider :sliderStatus="sliderStatus" :maximum.sync="maximum" />
     <ProductList :products="products" :maximum="maximum" @add="addItem" />
   </div>
 </template>
 
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
+import Navbar from "./components/Navbar";
 import PriceSlider from "./components/PriceSlider";
 import ProductList from "./components/ProductList";
 
 export default {
   name: "App",
+  components: {
+    Navbar,
+    PriceSlider,
+    ProductList
+  },
   data() {
     return {
       products: [],
@@ -30,12 +34,10 @@ export default {
       .then(data => (this.products = data))
       .catch(err => console.log(err));
   },
-  components: {
-    FontAwesomeIcon,
-    PriceSlider,
-    ProductList
-  },
   methods: {
+    toggleStatus() {
+      this.sliderStatus = !this.sliderStatus;
+    },
     addItem(product) {
       let whichProduct;
       const existing = this.cart.filter((item, index) => {
@@ -51,6 +53,13 @@ export default {
         this.cart[whichProduct].qty++;
       } else {
         this.cart.push({ product, qty: 1 });
+      }
+    },
+    deleteItem(id) {
+      if (this.cart[id].qty > 1) {
+        this.cart[id].qty--;
+      } else {
+        this.cart.splice(id, 1);
       }
     }
   }
