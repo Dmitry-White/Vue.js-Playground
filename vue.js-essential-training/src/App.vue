@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="container mt-5">
-    <Checkout :cart="cart" @delete="deleteItem" @add="addItem" />
-    <Products
+    <router-view
       :cart="cart"
       :sliderStatus="sliderStatus"
       :products="products"
@@ -14,15 +13,8 @@
 </template>
 
 <script>
-import Products from "./components/Products";
-import Checkout from "./components/Checkout";
-
 export default {
   name: "App",
-  components: {
-    Products,
-    Checkout
-  },
   data() {
     return {
       products: [],
