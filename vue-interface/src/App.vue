@@ -1,9 +1,16 @@
 <template>
-  <div id="app">Hello World</div>
+  <div id="main-app" class="container">
+    <h4>{{ title }}</h4>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: "MainApp",
+  data() {
+    return {
+      title: "Appointment List",
+    };
+  },
 };
 </script>
