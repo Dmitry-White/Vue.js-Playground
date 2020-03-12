@@ -1,7 +1,7 @@
 <template>
   <section id="main-app" class="container">
     <div class="row justify-content-center">
-      <AddAppointment />
+      <AddAppointment @submit="addItem" />
       <AppointmentList
         :appointments="appointments"
         @remove="removeItem"
@@ -54,6 +54,13 @@ export default {
       });
       console.log(aptIndex);
       this.appointments[aptIndex][field] = text;
+    },
+    addItem(item) {
+      this.appointments.push({
+        ...item,
+        aptId: this.aptIndex,
+      });
+      this.aptIndex++;
     },
   },
 };

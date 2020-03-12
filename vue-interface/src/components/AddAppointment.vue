@@ -9,7 +9,7 @@
       </div>
 
       <div class="card-body" :class="{ 'd-none': !isVisible }">
-        <form id="aptForm">
+        <form id="aptForm" @submit.prevent="submitHandler">
           <div class="form-group form-row">
             <label class="col-md-2 col-form-label text-md-right" for="petName"
               >Pet Name</label
@@ -21,6 +21,7 @@
                 name="petName"
                 id="petName"
                 placeholder="Pet's Name"
+                v-model="formData.petName"
               />
             </div>
           </div>
@@ -35,6 +36,7 @@
                 class="form-control"
                 id="ownerName"
                 placeholder="Owner's Name"
+                v-model="formData.ownerName"
               />
             </div>
           </div>
@@ -44,7 +46,12 @@
               >Date</label
             >
             <div class="col-md-4">
-              <input type="date" class="form-control" id="aptDate" />
+              <input
+                type="date"
+                class="form-control"
+                id="aptDate"
+                v-model="formData.aptDate"
+              />
             </div>
             <label class="col-md-2 col-form-label text-md-right" for="aptTime"
               >Time</label
@@ -55,6 +62,7 @@
                 class="form-control"
                 name="aptTime"
                 id="aptTime"
+                v-model="formData.aptTime"
               />
             </div>
           </div>
@@ -71,6 +79,7 @@
                 name="aptNotes"
                 id="aptNotes"
                 placeholder="Appointment Notes"
+                v-model="formData.aptNotes"
               ></textarea>
             </div>
           </div>
@@ -99,7 +108,22 @@ export default {
   data() {
     return {
       isVisible: false,
+      formData: {},
+      submitData: {},
     };
+  },
+  methods: {
+    submitHandler() {
+      const data = {
+        petName: this.formData.petName,
+        petOwner: this.formData.ownerName,
+        aptDate: `${this.formData.aptDate} ${this.formData.aptTime}`,
+        aptNotes: this.formData.aptNotes,
+      };
+      this.$emit("submit", data);
+      this.formData = {};
+      this.isVisible = false;
+    },
   },
 };
 </script>
