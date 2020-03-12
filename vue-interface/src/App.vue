@@ -1,7 +1,11 @@
 <template>
   <section id="main-app" class="container">
     <div class="row justify-content-center">
-      <AppointmentList :appointments="appointments" @remove="removeItem" />
+      <AppointmentList
+        :appointments="appointments"
+        @remove="removeItem"
+        @edit="editItem"
+      />
     </div>
   </section>
 </template>
@@ -39,6 +43,14 @@ export default {
   methods: {
     removeItem(item) {
       this.appointments = _.without(this.appointments, item);
+    },
+    editItem(id, field, text) {
+      console.log(id, field, text);
+      const aptIndex = _.findIndex(this.appointments, {
+        aptId: id,
+      });
+      console.log(aptIndex);
+      this.appointments[aptIndex][field] = text;
     },
   },
 };
