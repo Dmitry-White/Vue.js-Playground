@@ -2,7 +2,11 @@
   <section id="main-app" class="container">
     <div class="row justify-content-center">
       <AddAppointment @submit="addItem" />
-      <SearchAppointments @search="searchItems" />
+      <SearchAppointments
+        @search="searchItems"
+        :filterDir="filterDir"
+        :filterKey="filterKey"
+      />
       <AppointmentList
         :appointments="filteredApts"
         @remove="removeItem"

@@ -29,7 +29,7 @@
             id="petName"
           >
             Pet Name
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="filterKey === 'petName'" />
           </a>
 
           <a
@@ -38,7 +38,7 @@
             id="aptDate"
           >
             Date
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="filterKey === 'aptDate'" />
           </a>
 
           <a
@@ -47,7 +47,7 @@
             id="ownerName"
           >
             Owner
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="filterKey === 'petOwner'" />
           </a>
 
           <div class="dropdown-divider" role="separator"></div>
@@ -58,7 +58,7 @@
             id="asc"
           >
             Asc
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="filterDir === 'asc'" />
           </a>
 
           <a
@@ -67,7 +67,7 @@
             id="desc"
           >
             Desc
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="filterDir === 'desc'" />
           </a>
         </div>
       </div>
@@ -83,6 +83,7 @@ export default {
   components: {
     FontAwesomeIcon,
   },
+  props: ["filterKey", "filterDir"],
   data() {
     return {
       searchTerm: "",
