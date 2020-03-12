@@ -3,8 +3,8 @@
     <div class="list-group list-group-flush">
       <div
         class="list-group-item d-flex align-items-start"
-        v-for="(item, index) in appointments"
-        :key="index"
+        v-for="item in appointments"
+        :key="item.aptId"
         @click="() => clickHandler(item)"
       >
         <button class="mr-2 btn btn-small btn-danger">

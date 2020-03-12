@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       appointments: [],
+      aptIndex: 0,
     };
   },
   components: {
@@ -25,7 +26,14 @@ export default {
   mounted() {
     axios
       .get("./data/appointments.json")
-      .then((res) => (this.appointments = res.data))
+      .then(
+        (res) =>
+          (this.appointments = res.data.map((item) => {
+            item.aptId = this.aptIndex;
+            this.aptIndex++;
+            return item;
+          }))
+      )
       .catch((err) => console.error(err));
   },
   methods: {
