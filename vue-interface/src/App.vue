@@ -1,14 +1,12 @@
 <template>
   <section id="main-app" class="container">
-    <h3>{{ title }}</h3>
-    <FontAwesomeIcon icon="plus" class="mr-2" />Add Appointment
-
-    <AppointmentList :appointments="appointments" />
+    <div class="row justify-content-center">
+      <AppointmentList :appointments="appointments" />
+    </div>
   </section>
 </template>
 
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import axios from "axios";
 
 import AppointmentList from "./components/AppointmentList";
@@ -17,12 +15,10 @@ export default {
   name: "MainApp",
   data() {
     return {
-      title: "Appointment List",
       appointments: [],
     };
   },
   components: {
-    FontAwesomeIcon,
     AppointmentList,
   },
   mounted() {
