@@ -2,7 +2,7 @@
   <section id="main-app" class="container">
     <div class="row justify-content-center">
       <AddAppointment @submit="addItem" />
-      <SearchAppointments />
+      <SearchAppointments @search="searchItems" />
       <AppointmentList
         :appointments="appointments"
         @remove="removeItem"
@@ -31,6 +31,7 @@ export default {
     return {
       appointments: [],
       aptIndex: 0,
+      searchTerms: "",
     };
   },
   mounted() {
@@ -64,6 +65,9 @@ export default {
         aptId: this.aptIndex,
       });
       this.aptIndex++;
+    },
+    searchItems(terms) {
+      this.searchTerms = terms;
     },
   },
 };
