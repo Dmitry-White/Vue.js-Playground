@@ -2,6 +2,7 @@
   <section id="main-app" class="container">
     <div class="row justify-content-center">
       <AddAppointment @submit="addItem" />
+      <SearchAppointments />
       <AppointmentList
         :appointments="appointments"
         @remove="removeItem"
@@ -17,12 +18,14 @@ import _ from "lodash";
 
 import AppointmentList from "./components/AppointmentList";
 import AddAppointment from "./components/AddAppointment";
+import SearchAppointments from "./components/SearchAppointments";
 
 export default {
   name: "MainApp",
   components: {
     AppointmentList,
     AddAppointment,
+    SearchAppointments,
   },
   data() {
     return {
