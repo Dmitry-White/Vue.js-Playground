@@ -4,7 +4,7 @@
       <AddAppointment @submit="addItem" />
       <SearchAppointments @search="searchItems" />
       <AppointmentList
-        :appointments="appointments"
+        :appointments="searchedApts"
         @remove="removeItem"
         @edit="editItem"
       />
@@ -46,6 +46,17 @@ export default {
           }))
       )
       .catch((err) => console.error(err));
+  },
+  computed: {
+    searchedApts() {
+      const term = this.searchTerms.toLowerCase();
+      return this.appointments.filter(
+        ({ petName, petOwner, aptNotes }) =>
+          petName.toLowerCase().match(term) ||
+          petOwner.toLowerCase().match(term) ||
+          aptNotes.toLowerCase().match(term)
+      );
+    },
   },
   methods: {
     removeItem(item) {
