@@ -3,9 +3,11 @@
     <div class="row justify-content-center">
       <AddAppointment @submit="addItem" />
       <SearchAppointments
-        @search="searchItems"
         :filterDir="filterDir"
         :filterKey="filterKey"
+        @search="searchItems"
+        @changeKey="changeKey"
+        @changeDir="changeDir"
       />
       <AppointmentList
         :appointments="filteredApts"
@@ -92,6 +94,12 @@ export default {
     },
     searchItems(terms) {
       this.searchTerms = terms;
+    },
+    changeKey(value) {
+      this.filterKey = value;
+    },
+    changeDir(value) {
+      this.filterDir = value;
     },
   },
 };

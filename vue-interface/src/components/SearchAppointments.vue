@@ -27,6 +27,7 @@
             href="#"
             class="dropdown-item d-flex justify-content-between"
             id="petName"
+            @click="() => changeFilter('changeKey', 'petName')"
           >
             Pet Name
             <font-awesome-icon icon="check" v-if="filterKey === 'petName'" />
@@ -36,6 +37,7 @@
             class="dropdown-item d-flex justify-content-between"
             href="#"
             id="aptDate"
+            @click="() => changeFilter('changeKey', 'aptDate')"
           >
             Date
             <font-awesome-icon icon="check" v-if="filterKey === 'aptDate'" />
@@ -45,6 +47,7 @@
             href="#"
             class="dropdown-item d-flex justify-content-between"
             id="ownerName"
+            @click="() => changeFilter('changeKey', 'petOwner')"
           >
             Owner
             <font-awesome-icon icon="check" v-if="filterKey === 'petOwner'" />
@@ -56,6 +59,7 @@
             class="dropdown-item d-flex justify-content-between"
             href="#"
             id="asc"
+            @click="() => changeFilter('changeDir', 'asc')"
           >
             Asc
             <font-awesome-icon icon="check" v-if="filterDir === 'asc'" />
@@ -65,6 +69,7 @@
             class="dropdown-item d-flex justify-content-between"
             href="#"
             id="desc"
+            @click="() => changeFilter('changeDir', 'desc')"
           >
             Desc
             <font-awesome-icon icon="check" v-if="filterDir === 'desc'" />
@@ -92,6 +97,11 @@ export default {
   watch: {
     searchTerm() {
       this.$emit("search", this.searchTerm);
+    },
+  },
+  methods: {
+    changeFilter(eventName, value) {
+      this.$emit(eventName, value);
     },
   },
 };
