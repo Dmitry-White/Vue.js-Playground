@@ -1,9 +1,8 @@
 <template>
   <div>
     <h4>Messages</h4>
-    <ul>
-      <li>First</li>
-      <li>Second</li>
+    <ul v-for="(message, i) in messages" :key="i">
+      <li>{{ message }}</li>
     </ul>
   </div>
 </template>
@@ -11,6 +10,11 @@
 <script>
 export default {
   name: "Messages",
+  data() {
+    return {
+      messages: ["hello", "hi"],
+    };
+  },
 };
 </script>
 
