@@ -1,9 +1,14 @@
 <template>
   <div>
-    <h4>Messages</h4>
-    <ul v-for="(message, i) in messages" :key="i">
-      <li>{{ message }}</li>
-    </ul>
+    <h4 class="display-1">Messages</h4>
+
+    <v-list>
+      <v-list-item v-for="(message, i) in messages" :key="i" @click="() => {}">
+        <v-list-item-content>
+          <v-list-item-title v-text="message"></v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </div>
 </template>
 
