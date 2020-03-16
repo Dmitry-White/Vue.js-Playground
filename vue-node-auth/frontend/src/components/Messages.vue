@@ -19,14 +19,12 @@ export default {
   name: "Messages",
   data() {
     return {
-      messages: ["hello", "hi"],
+      messages: [],
     };
   },
-  created() {
-    axios
-      .get("http://localhost:3000/messages")
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  async created() {
+    const response = await axios.get("http://localhost:3000/messages");
+    this.messages = response.data;
   },
 };
 </script>

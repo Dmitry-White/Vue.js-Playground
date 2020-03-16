@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 app.get('/messages', (_, res) => {
-  const messages = ["hello", "hi"];
+  const messages = ["yes", "no", "s*x", "I dunno"];
 
   res.send(messages);
 });
