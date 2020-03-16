@@ -17,11 +17,9 @@ import axios from "axios";
 
 export default {
   name: "Messages",
-  data() {
-    return {
-      messages: [],
-    };
-  },
+  data: () => ({
+    messages: [],
+  }),
   async created() {
     const response = await axios.get("http://localhost:3000/messages");
     this.messages = response.data;
