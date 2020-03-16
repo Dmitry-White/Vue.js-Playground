@@ -3,7 +3,9 @@
     <v-app-bar app> </v-app-bar>
 
     <v-content>
+      <br />
       <NewMessage />
+      <br />
       <Messages />
     </v-content>
   </v-app>
