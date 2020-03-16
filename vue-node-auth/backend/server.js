@@ -8,17 +8,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/messages', (_, res) => {
-  const messages = ["yes", "no", "s*x", "I dunno"];
+const messages = ["yes", "no", "s*x", "I dunno"];
 
-  res.send(messages);
-});
+app.get('/messages', (_, res) => res.send(messages));
 
 app.post('/messages', (req, res) => {
-  const { body } = req;
-  console.log(body);
+  const { body: { message } } = req;
+  messages.push(message);
 
-  res.json(body);
+  res.json(message);
 });
 
 app.listen(PORT, () => console.log(`App is running on port ${PORT}`));
