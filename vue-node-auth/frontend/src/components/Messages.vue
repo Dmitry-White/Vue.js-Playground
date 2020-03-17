@@ -29,6 +29,10 @@ export default {
     messages: [],
   }),
   async created() {
+    this.$root.$on("newMessage", (message) => {
+      this.messages.push(message);
+    });
+
     const response = await axios.get("http://localhost:3000/messages");
     this.messages = response.data;
   },

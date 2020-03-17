@@ -31,12 +31,20 @@ export default {
     messageBody: "",
   }),
   methods: {
-    submit() {
+    async submit() {
       const data = {
         message: this.messageBody,
       };
-
-      axios.post("http://localhost:3000/messages", data);
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/messages",
+          data
+        );
+        const message = response.data;
+        this.$root.$emit("newMessage", message);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
