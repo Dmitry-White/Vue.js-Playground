@@ -4,15 +4,19 @@
       <v-toolbar dark>
         <v-toolbar-title>New Message</v-toolbar-title>
       </v-toolbar>
-      <v-form>
+      <v-form @submit.prevent="submit">
         <v-container>
           <v-row>
             <v-col cols="12" md="4">
-              <v-text-field label="New Message" required></v-text-field>
+              <v-text-field
+                label="New Message"
+                v-model="messageBody"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-container>
-        <v-btn @click="() => {}">submit</v-btn>
+        <v-btn type="submit">submit</v-btn>
       </v-form>
     </v-card>
   </v-flex>
@@ -21,7 +25,14 @@
 <script>
 export default {
   name: "NewMessage",
-  data: () => ({}),
+  data: () => ({
+    messageBody: "",
+  }),
+  methods: {
+    submit() {
+      console.log(this.messageBody);
+    },
+  },
 };
 </script>
 
