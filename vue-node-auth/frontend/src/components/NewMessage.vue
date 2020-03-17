@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NewMessage",
   data: () => ({
@@ -30,7 +32,11 @@ export default {
   }),
   methods: {
     submit() {
-      console.log(this.messageBody);
+      const data = {
+        message: this.messageBody,
+      };
+
+      axios.post("http://localhost:3000/messages", data);
     },
   },
 };
