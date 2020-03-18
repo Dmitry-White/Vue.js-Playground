@@ -41,7 +41,7 @@ export default {
           data
         );
         const message = response.data;
-        this.$store.state.messages.push(message);
+        this.$store.commit("addMessage", message);
       } catch (error) {
         console.log(error);
       }

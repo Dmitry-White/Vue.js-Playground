@@ -27,7 +27,7 @@ export default {
   name: "Messages",
   async created() {
     const response = await axios.get("http://localhost:3000/messages");
-    this.$store.state.messages = response.data;
+    this.$store.commit("setMessages", response.data);
   },
 };
 </script>
