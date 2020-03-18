@@ -25,8 +25,6 @@
 <script>
 import axios from "axios";
 
-import store from "../store";
-
 export default {
   name: "NewMessage",
   data: () => ({
@@ -43,7 +41,7 @@ export default {
           data
         );
         const message = response.data;
-        store.state.messages.push(message);
+        this.$store.state.messages.push(message);
       } catch (error) {
         console.log(error);
       }

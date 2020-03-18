@@ -1,7 +1,12 @@
-const store = {
+import Vue from 'vue';
+import Vuex from "vuex";
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
   state: {
-    messages: ['msg1', 'msg2']
+    messages: []
   }
-}
+});
 
 export default store;

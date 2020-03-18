@@ -7,7 +7,7 @@
 
       <v-list>
         <v-list-item
-          v-for="(message, i) in store.state.messages"
+          v-for="(message, i) in $store.state.messages"
           :key="i"
           @click="() => {}"
         >
@@ -23,16 +23,11 @@
 <script>
 import axios from "axios";
 
-import store from "../store";
-
 export default {
   name: "Messages",
-  data: () => ({
-    store,
-  }),
   async created() {
     const response = await axios.get("http://localhost:3000/messages");
-    store.state.messages = response.data;
+    this.$store.state.messages = response.data;
   },
 };
 </script>
