@@ -23,28 +23,18 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "NewMessage",
   data: () => ({
     messageBody: "",
   }),
   methods: {
-    async submit() {
+    submit() {
       const data = {
         message: this.messageBody,
       };
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/messages",
-          data
-        );
-        const message = response.data;
-        this.$store.commit("addMessage", message);
-      } catch (error) {
-        console.log(error);
-      }
+
+      this.$store.dispatch("newMessage", data);
     },
   },
 };

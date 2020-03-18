@@ -21,13 +21,10 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Messages",
-  async created() {
-    const response = await axios.get("http://localhost:3000/messages");
-    this.$store.commit("setMessages", response.data);
+  created() {
+    this.$store.dispatch("getMessages");
   },
 };
 </script>
