@@ -1,10 +1,10 @@
 import Vue from 'vue';
-import Vuex from "vuex";
+import Vuex from 'vuex';
 import axios from 'axios';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+const storeOptions = {
   state: {
     messages: [],
   },
@@ -38,6 +38,8 @@ const store = new Vuex.Store({
       }
     }
   }
-});
+};
+
+const store = new Vuex.Store(storeOptions);
 
 export default store;
