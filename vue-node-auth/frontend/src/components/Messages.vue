@@ -9,7 +9,7 @@
         <v-list-item
           v-for="(message, i) in $store.state.messages"
           :key="i"
-          @click="() => {}"
+          :to="`/message/${i}`"
         >
           <v-list-item-content>
             <v-list-item-title v-text="message"></v-list-item-title>

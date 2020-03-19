@@ -4,7 +4,7 @@
       <v-toolbar dark>
         <v-toolbar-title>Message</v-toolbar-title>
       </v-toolbar>
-      {{ $store.state.currentMessage }}
+      <v-card-text>{{ $store.state.currentMessage }}</v-card-text>
     </v-card>
   </v-flex>
 </template>
