@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const storeOptions = {
   state: {
     messages: [],
+    currentMessage: ''
   },
   mutations: {
     setMessages(state, messages) {
@@ -14,6 +15,9 @@ const storeOptions = {
     },
     addMessage(state, message) {
       state.messages.push(message);
+    },
+    setMessage(state, message) {
+      state.currentMessage = message;
     }
   },
   actions: {
@@ -33,6 +37,14 @@ const storeOptions = {
         );
         const message = response.data;
         commit("addMessage", message);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getMessage({ commit }, id) {
+      try {
+        const response = await axios.get(`http://localhost:3000/messages/${id}`);
+        commit("setMessage", response.data);
       } catch (error) {
         console.log(error);
       }

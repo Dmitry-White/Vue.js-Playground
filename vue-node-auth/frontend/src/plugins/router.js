@@ -11,7 +11,7 @@ const routerOptions = {
   routes: [
     { path: '/', component: Messages },
     { path: '/new-message', component: NewMessage },
-    { path: '/message', component: Message }
+    { path: '/message/:id', component: Message }
   ],
   mode: 'history',
 }

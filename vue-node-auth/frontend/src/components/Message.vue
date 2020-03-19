@@ -4,7 +4,7 @@
       <v-toolbar dark>
         <v-toolbar-title>Message</v-toolbar-title>
       </v-toolbar>
-      {{ messageBody }}
+      {{ $store.state.currentMessage }}
     </v-card>
   </v-flex>
 </template>
@@ -12,9 +12,10 @@
 <script>
 export default {
   name: "Message",
-  data: () => ({
-    messageBody: "Hi",
-  }),
+  created() {
+    const { id } = this.$route.params;
+    this.$store.dispatch("getMessage", id);
+  },
 };
 </script>
 
