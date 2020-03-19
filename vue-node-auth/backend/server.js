@@ -12,6 +12,8 @@ const messages = ["yes", "no", "s*x", "I dunno"];
 
 app.get('/messages', (_, res) => res.send(messages));
 
+app.get('/messages/:id', (req, res) => res.send(messages[req.params.id]));
+
 app.post('/messages', (req, res) => {
   const { body: { message } } = req;
   messages.push(message);
