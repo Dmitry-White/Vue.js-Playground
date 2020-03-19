@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-btn depressed>Messages</v-btn>
+      <v-btn depressed to='/'>Messages</v-btn>
+      <v-btn depressed to='/message'>New Message</v-btn>
       <v-spacer />
       <v-btn>Login</v-btn>
     </v-app-bar>
