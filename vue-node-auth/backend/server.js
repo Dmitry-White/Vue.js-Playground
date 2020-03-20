@@ -16,7 +16,8 @@ app.get('/messages', (_, res) => res.send(messages));
 app.get('/messages/:id', (req, res) => res.send(messages[req.params.id]));
 
 app.post('/messages', (req, res) => {
-  const { body: { message } } = req;
+  const { body: { message }, headers: { authorization } } = req;
+  console.log(authorization);
   messages.push(message);
 
   res.json(message);
@@ -24,9 +25,9 @@ app.post('/messages', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { body: userData } = req;
-  users.push(userData);
+  const usersLength = users.push(userData);
 
-  res.json(userData);
+  res.json({ ...userData, id: usersLength - 1 });
 });
 
 app.listen(PORT, () => console.log(`App is running on port ${PORT}`));

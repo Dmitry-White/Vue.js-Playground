@@ -49,14 +49,15 @@ const storeOptions = {
         console.log(error);
       }
     },
-    async register({ commit }, data) {
+    async register(_, data) {
       try {
         const response = await axios.post(
           "http://localhost:3000/register",
           data
         );
-        const message = response.data;
-        commit("setAuthentication", message);
+        const user = response.data;
+        localStorage.setItem('token', user.id);
+        axios.defaults.headers['Authorization'] = user.id;
       } catch (error) {
         console.log(error);
       }
