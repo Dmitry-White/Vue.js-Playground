@@ -7,7 +7,7 @@ Vue.use(Vuex);
 const storeOptions = {
   state: {
     messages: [],
-    currentMessage: ''
+    currentMessage: null,
   },
   mutations: {
     setMessages(state, messages) {
