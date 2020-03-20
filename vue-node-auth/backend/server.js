@@ -9,12 +9,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const messages = [
-  { user: 0, text: "yes" },
-  { user: 0, text: "no" },
-  { user: 0, text: "s*x" },
-  { user: 0, text: "I dunno" }
+  { user: 'Jim', text: "yes" },
+  { user: 'Jim', text: "no" },
+  { user: 'Jim', text: "s*x" },
+  { user: 'Jim', text: "I dunno" }
 ];
-const users = [];
+const users = [
+  { username: 'Jim', password: 1 }
+];
 
 app.get('/messages', (_, res) => res.send(messages));
 
@@ -26,8 +28,10 @@ app.post('/messages', (req, res) => {
     headers: { authorization }
   } = req;
 
+  const user = users[authorization];
+
   const messageObj = {
-    user: authorization,
+    user: user.username,
     text: message,
   };
 

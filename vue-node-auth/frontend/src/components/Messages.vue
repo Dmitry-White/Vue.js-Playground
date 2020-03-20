@@ -13,6 +13,7 @@
         >
           <v-list-item-content>
             <v-list-item-title v-text="message.text"></v-list-item-title>
+            <v-list-item-sub-title v-text="message.user"></v-list-item-sub-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
