@@ -48,7 +48,19 @@ const storeOptions = {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+    async register({ commit }, data) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/register",
+          data
+        );
+        const message = response.data;
+        commit("setAuthentication", message);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   }
 };
 
