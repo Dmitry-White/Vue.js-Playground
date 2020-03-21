@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
 
 const PORT = 3000;
 const app = express();
@@ -43,8 +44,11 @@ app.post('/messages', (req, res) => {
 app.post('/register', (req, res) => {
   const { body: userData } = req;
   const usersLength = users.push(userData);
+  const userId = usersLength - 1;
 
-  res.json({ ...userData, id: usersLength - 1 });
+  const token = jwt.sign(userId, '123');
+
+  res.json(token);
 });
 
 app.listen(PORT, () => console.log(`App is running on port ${PORT}`));
