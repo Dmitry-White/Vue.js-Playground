@@ -4,8 +4,8 @@
       <v-btn depressed to='/'>Messages</v-btn>
       <v-btn depressed to='/new-message'>New Message</v-btn>
       <v-spacer />
-      <v-btn depressed to='/register'>Register</v-btn>
-      <v-btn>Login</v-btn>
+      <v-btn v-if="!$store.state.token" depressed to='/register'>Register</v-btn>
+      <v-btn v-if="!$store.state.token">Login</v-btn>
     </v-app-bar>
 
     <v-content>

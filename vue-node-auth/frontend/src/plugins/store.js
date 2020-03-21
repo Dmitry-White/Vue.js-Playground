@@ -8,6 +8,7 @@ const storeOptions = {
   state: {
     messages: [],
     currentMessage: null,
+    token: localStorage.getItem('token') || '',
   },
   mutations: {
     setMessages(state, messages) {
@@ -18,6 +19,9 @@ const storeOptions = {
     },
     setMessage(state, message) {
       state.currentMessage = message;
+    },
+    setAuth(state, token) {
+      state.token = token;
     }
   },
   actions: {
@@ -49,7 +53,7 @@ const storeOptions = {
         console.log(error);
       }
     },
-    async register(_, data) {
+    async register({ commit }, data) {
       try {
         const response = await axios.post(
           "http://localhost:3000/register",
@@ -58,6 +62,7 @@ const storeOptions = {
         const token = response.data;
         localStorage.setItem('token', token);
         axios.defaults.headers['Authorization'] = token;
+        commit('setAuth', token);
       } catch (error) {
         console.log(error);
       }
