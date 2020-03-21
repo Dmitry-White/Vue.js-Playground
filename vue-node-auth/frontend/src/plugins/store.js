@@ -70,6 +70,20 @@ const storeOptions = {
         console.log(error);
       }
     },
+    async login({ commit }, data) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/login",
+          data
+        );
+        const token = response.data;
+        localStorage.setItem('token', token);
+        axios.defaults.headers['Authorization'] = token;
+        commit('setAuth', token);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     logout({ commit }) {
       localStorage.removeItem('token');
       commit('removeAuth');

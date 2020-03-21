@@ -2,9 +2,9 @@
   <v-flex sm8 offset-sm2>
     <v-card>
       <v-toolbar dark>
-        <v-toolbar-title>Register</v-toolbar-title>
+        <v-toolbar-title>Login</v-toolbar-title>
       </v-toolbar>
-      <v-form @submit.prevent="register">
+      <v-form @submit.prevent="login">
         <v-container>
           <v-row>
             <v-col cols="12" md="4">
@@ -21,7 +21,7 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-btn type="submit">Register</v-btn>
+        <v-btn type="submit">Login</v-btn>
       </v-form>
     </v-card>
   </v-flex>
@@ -29,19 +29,19 @@
 
 <script>
 export default {
-  name: "Register",
+  name: "Login",
   data: () => ({
     username: "",
     password: "",
   }),
   methods: {
-    register() {
+    login() {
       const data = {
         username: this.username,
         password: this.password,
       };
 
-      this.$store.dispatch("register", data);
+      this.$store.dispatch("login", data);
     },
   },
 };
