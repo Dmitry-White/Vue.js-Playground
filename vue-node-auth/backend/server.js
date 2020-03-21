@@ -18,7 +18,7 @@ const messages = [
   { user: 'Jim', text: "I dunno" }
 ];
 const users = [
-  { username: 'Jim', password: 1 }
+  { username: 'Jim', password: '1' }
 ];
 
 app.get('/messages', (_, res) => res.send(messages));
@@ -48,6 +48,20 @@ app.post('/register', (req, res) => {
   const { body: userData } = req;
   const usersLength = users.push(userData);
   const userId = usersLength - 1;
+
+  const token = jwt.sign(userId, JWT_SALT);
+
+  res.json(token);
+});
+
+app.post('/login', (req, res) => {
+  const { body: userData } = req;
+
+  const userId = users.findIndex(user => user.username === userData.username);
+
+  if (userId === -1 || users[userId].password !== userData.password) {
+    return res.status(401).send({ message: 'Name or password is invalid' });
+  }
 
   const token = jwt.sign(userId, JWT_SALT);
 
