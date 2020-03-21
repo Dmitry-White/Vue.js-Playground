@@ -55,9 +55,9 @@ const storeOptions = {
           "http://localhost:3000/register",
           data
         );
-        const user = response.data;
-        localStorage.setItem('token', user.id);
-        axios.defaults.headers['Authorization'] = user.id;
+        const token = response.data;
+        localStorage.setItem('token', token);
+        axios.defaults.headers['Authorization'] = token;
       } catch (error) {
         console.log(error);
       }
