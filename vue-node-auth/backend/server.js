@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const JWT_SALT = '123';
+
 const messages = [
   { user: 'Jim', text: "yes" },
   { user: 'Jim', text: "no" },
@@ -29,7 +31,8 @@ app.post('/messages', (req, res) => {
     headers: { authorization }
   } = req;
 
-  const user = users[authorization];
+  const userId = jwt.decode(authorization, JWT_SALT);
+  const user = users[userId];
 
   const messageObj = {
     user: user.username,
@@ -46,7 +49,7 @@ app.post('/register', (req, res) => {
   const usersLength = users.push(userData);
   const userId = usersLength - 1;
 
-  const token = jwt.sign(userId, '123');
+  const token = jwt.sign(userId, JWT_SALT);
 
   res.json(token);
 });
