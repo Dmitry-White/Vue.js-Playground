@@ -22,6 +22,9 @@ const storeOptions = {
     },
     setAuth(state, token) {
       state.token = token;
+    },
+    removeAuth(state) {
+      state.token = '';
     }
   },
   actions: {
@@ -67,6 +70,10 @@ const storeOptions = {
         console.log(error);
       }
     },
+    logout({ commit }) {
+      localStorage.removeItem('token');
+      commit('removeAuth');
+    }
   }
 };
 
