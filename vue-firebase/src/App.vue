@@ -1,9 +1,21 @@
 <template>
   <div id="app">
-    <router-view class="container"/>
+    <Navigation />
+    <router-view class="container" />
   </div>
 </template>
 
+<script>
+import Navigation from "@/components/Navigation.vue";
+
+export default {
+  name: "App",
+  components: {
+    Navigation,
+  },
+};
+</script>
+
 <style lang="scss">
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import "node_modules/bootstrap/scss/bootstrap";
 </style>
