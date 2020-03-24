@@ -11,6 +11,7 @@
           Application which includes connection to a database and routing. It's
           a practical way to learn <a href="https://vuejs.org/">Vue.js</a> with
           <a href="https://firebase.google.com">Firebase</a>.
+          <FontAwesomeIcon class="text-danger" icon="star" />
         </p>
 
         <router-link to="/register" class="btn btn-outline-primary mr-2">
@@ -29,7 +30,12 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 export default {
   name: "Home",
+  components: {
+    FontAwesomeIcon,
+  },
 };
 </script>
