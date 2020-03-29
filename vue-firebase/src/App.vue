@@ -12,20 +12,20 @@ import db from "@/db";
 export default {
   name: "App",
   data: () => ({
-    user: null,
+    user: null
   }),
   mounted() {
     db.collection("users")
       .doc("l1ImCfNOm79zD0V7gkTa")
       .get()
-      .then((res) => {
+      .then(res => {
         this.user = res.data().name;
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   },
   components: {
-    Navigation,
-  },
+    Navigation
+  }
 };
 </script>
 
