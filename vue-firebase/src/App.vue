@@ -6,8 +6,10 @@
 </template>
 
 <script>
+import { auth } from "firebase";
+
 import Navigation from "@/components/Navigation";
-import db from "@/db";
+import "@/db";
 
 export default {
   name: "App",
@@ -15,13 +17,9 @@ export default {
     user: null
   }),
   mounted() {
-    db.collection("users")
-      .doc("l1ImCfNOm79zD0V7gkTa")
-      .get()
-      .then(res => {
-        this.user = res.data().name;
-      })
-      .catch(err => console.log(err));
+    auth().onAuthStateChanged(user => {
+      this.user = user.email;
+    })
   },
   components: {
     Navigation
