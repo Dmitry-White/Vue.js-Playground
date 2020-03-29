@@ -36,21 +36,8 @@
 </template>
 
 <script>
-import db from "../db";
-
 export default {
   name: "Home",
-  data: () => ({
-    user: null,
-  }),
-  mounted() {
-    db.collection("users")
-      .doc("l1ImCfNOm79zD0V7gkTa")
-      .get()
-      .then((res) => {
-        this.user = res.data().name;
-      })
-      .catch((err) => console.log(err));
-  },
+  props: ["user"],
 };
 </script>
