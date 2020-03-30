@@ -3,7 +3,9 @@
     <div class="text-secondary text-center" v-if="user">
       Welcome back
       <span class="text-weight-bold text-info">{{ user }}</span>
-      <a href="#" role="button" class="text-primary ml-2" @click="logout">Logout</a>
+      <a href="#" role="button" class="text-primary ml-2" @click="logout"
+        >Logout</a
+      >
     </div>
     <div class="container text-center">
       <div class="row justify-content-center">
@@ -20,13 +22,21 @@
             <a href="https://firebase.google.com">Firebase</a>.
           </p>
 
-          <router-link to="/register" class="btn btn-outline-primary mr-2">
+          <router-link
+            to="/register"
+            class="btn btn-outline-primary mr-2"
+            v-if="!user"
+          >
             Register
           </router-link>
-          <router-link to="/login" class="btn btn-outline-primary mr-2">
+          <router-link
+            to="/login"
+            class="btn btn-outline-primary mr-2"
+            v-if="!user"
+          >
             Log In
           </router-link>
-          <router-link to="/meetings" class="btn btn-primary">
+          <router-link to="/meetings" class="btn btn-primary" v-if="user">
             Meetings
           </router-link>
         </div>
@@ -43,7 +53,7 @@ export default {
   methods: {
     logout() {
       this.$emit("logout");
-    },
-  },
+    }
+  }
 };
 </script>

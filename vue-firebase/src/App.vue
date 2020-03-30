@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navigation />
+    <Navigation :user="user" @logout="logout" />
     <router-view class="container" :user="user" @logout="logout" />
   </div>
 </template>
@@ -14,7 +14,7 @@ import "@/db";
 export default {
   name: "App",
   data: () => ({
-    user: null,
+    user: null
   }),
   methods: {
     logout() {
@@ -24,17 +24,17 @@ export default {
           this.user = null;
           this.$router.push("login");
         })
-        .catch((err) => console.log(err));
-    },
+        .catch(err => console.log(err));
+    }
   },
   mounted() {
-    auth().onAuthStateChanged((user) => {
-      this.user = user ? user.displayName : null
+    auth().onAuthStateChanged(user => {
+      this.user = user ? user.displayName : null;
     });
   },
   components: {
-    Navigation,
-  },
+    Navigation
+  }
 };
 </script>
 

@@ -113,7 +113,7 @@ export default {
         .then(credentials => {
           return credentials.user.updateProfile({
             displayName: userInfo.displayName
-          })
+          });
         })
         .then(() => {
           this.$router.push("meetings");
