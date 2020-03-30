@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navigation />
-    <router-view class="container" :user="user" />
+    <router-view class="container" :user="user" @logout="logout" />
   </div>
 </template>
 
@@ -16,9 +16,20 @@ export default {
   data: () => ({
     user: null,
   }),
+  methods: {
+    logout() {
+      auth()
+        .signOut()
+        .then(() => {
+          this.user = null;
+          this.$router.push("login");
+        })
+        .catch((err) => console.log(err));
+    },
+  },
   mounted() {
     auth().onAuthStateChanged((user) => {
-      this.user = user.displayName;
+      this.user = user ? user.displayName : null
     });
   },
   components: {

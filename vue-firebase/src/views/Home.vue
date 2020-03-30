@@ -1,8 +1,9 @@
 <template>
   <div class="mt-3">
-    <div class="text-secondary text-center">
+    <div class="text-secondary text-center" v-if="user">
       Welcome back
       <span class="text-weight-bold text-info">{{ user }}</span>
+      <a href="#" role="button" class="text-primary ml-2" @click="logout">Logout</a>
     </div>
     <div class="container text-center">
       <div class="row justify-content-center">
@@ -38,6 +39,11 @@
 <script>
 export default {
   name: "Home",
-  props: ["user"]
+  props: ["user"],
+  methods: {
+    logout() {
+      this.$emit("logout");
+    },
+  },
 };
 </script>
