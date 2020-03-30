@@ -14,16 +14,16 @@ import "@/db";
 export default {
   name: "App",
   data: () => ({
-    user: null
+    user: null,
   }),
   mounted() {
-    auth().onAuthStateChanged(user => {
-      this.user = user.email;
+    auth().onAuthStateChanged((user) => {
+      this.user = user.displayName;
     });
   },
   components: {
-    Navigation
-  }
+    Navigation,
+  },
 };
 </script>
 

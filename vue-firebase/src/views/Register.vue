@@ -110,6 +110,11 @@ export default {
 
       auth()
         .createUserWithEmailAndPassword(userInfo.email, userInfo.password)
+        .then(credentials => {
+          return credentials.user.updateProfile({
+            displayName: userInfo.displayName
+          })
+        })
         .then(() => {
           this.$router.push("meetings");
         })
