@@ -63,13 +63,21 @@ export default {
         .doc(this.user.uid)
         .collection("meetings")
         .onSnapshot(snapshot => {
+          const snapData = [];
           snapshot.forEach(doc => {
-            this.meetings.push({
+            snapData.push({
               id: doc.id,
               name: doc.data().name
             });
           });
+          this.meetings = this.sortMeetings(snapData);
         });
+    },
+    sortMeetings(list) {
+      const sortedList = list.sort((a, b) => {
+        return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+      });
+      return sortedList;
     }
   }
 };
