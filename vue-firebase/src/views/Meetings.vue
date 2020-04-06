@@ -62,7 +62,7 @@
                 <router-link
                   class="btn btn-sm btn-outline-secondary"
                   title="Check In"
-                  to="/"
+                  :to="`/checkin/${user.uid}/${item.id}`"
                 >
                   <FontAwesomeIcon icon="link" />
                 </router-link>
