@@ -56,7 +56,7 @@ export default {
     },
     getDisplayName() {
       const { displayName } = this.user;
-      return displayName ? displayName : 'Anonymous'
+      return displayName ? displayName : "Anonymous";
     }
   }
 };

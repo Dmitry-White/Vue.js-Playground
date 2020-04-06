@@ -1,15 +1,20 @@
 <template>
   <div id="app">
     <Navigation :user="user" @logout="logout" />
-    <router-view class="container" :user="user" @logout="logout" />
+    <router-view
+      class="container"
+      :user="user"
+      @logout="logout"
+      @addMeeting="addMeeting"
+    />
   </div>
 </template>
 
 <script>
-import { auth } from "firebase";
+import { auth, firestore } from "firebase";
 
 import Navigation from "@/components/Navigation";
-import "@/db";
+import db from "@/db";
 
 export default {
   name: "App",
@@ -25,6 +30,15 @@ export default {
           this.$router.push("login");
         })
         .catch(err => console.log(err));
+    },
+    addMeeting(payload) {
+      db.collection("users")
+        .doc(this.user.uid)
+        .collection("meetings")
+        .add({
+          name: payload,
+          createdAt: firestore.FieldValue.serverTimestamp()
+        });
     }
   },
   mounted() {
