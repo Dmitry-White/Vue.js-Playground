@@ -18,10 +18,27 @@ import db from "@/db";
 
 export default {
   name: "App",
+  components: {
+    Navigation,
+  },
   data: () => ({
-    user: null
+    user: null,
+    meetings: [],
   }),
+  mounted() {
+    this.checkUser();
+  },
   methods: {
+    checkUser() {
+      auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.user = user;
+          this.getMeetings();
+        } else {
+          this.user = null;
+        }
+      });
+    },
     logout() {
       auth()
         .signOut()
@@ -29,7 +46,7 @@ export default {
           this.user = null;
           this.$router.push("login");
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
     addMeeting(payload) {
       db.collection("users")
@@ -37,18 +54,23 @@ export default {
         .collection("meetings")
         .add({
           name: payload,
-          createdAt: firestore.FieldValue.serverTimestamp()
+          createdAt: firestore.FieldValue.serverTimestamp(),
         });
-    }
+    },
+    getMeetings() {
+      db.collection("users")
+        .doc(this.user.uid)
+        .collection("meetings")
+        .onSnapshot((snapshot) => {
+          snapshot.forEach((doc) => {
+            this.meetings.push({
+              id: doc.id,
+              name: doc.data().name,
+            });
+          });
+        });
+    },
   },
-  mounted() {
-    auth().onAuthStateChanged(user => {
-      this.user = user ? user : null;
-    });
-  },
-  components: {
-    Navigation
-  }
 };
 </script>
 
