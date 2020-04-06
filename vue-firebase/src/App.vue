@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     auth().onAuthStateChanged(user => {
-      this.user = user ? user.displayName : null;
+      this.user = user ? user : null;
     });
   },
   components: {

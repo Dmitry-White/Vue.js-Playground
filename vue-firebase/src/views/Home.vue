@@ -2,7 +2,7 @@
   <div class="mt-3">
     <div class="text-secondary text-center" v-if="user">
       Welcome back
-      <span class="text-weight-bold text-info">{{ user }}</span>
+      <span class="text-weight-bold text-info">{{ getDisplayName() }}</span>
       <a href="#" role="button" class="text-primary ml-2" @click="logout"
         >Logout</a
       >
@@ -53,6 +53,10 @@ export default {
   methods: {
     logout() {
       this.$emit("logout");
+    },
+    getDisplayName() {
+      const { displayName } = this.user;
+      return displayName ? displayName : 'Anonymous'
     }
   }
 };
