@@ -1,5 +1,5 @@
 <template>
-  <form class="mt-3">
+  <form class="mt-3" @submit.prevent="handleCheckIn">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -18,6 +18,7 @@
                   class="form-control"
                   type="text"
                   placeholder="Name"
+                  v-model="displayName"
                 />
               </section>
               <section class="form-group">
@@ -29,6 +30,7 @@
                   class="form-control"
                   type="email"
                   placeholder="Email"
+                  v-model="email"
                 />
               </section>
               <div class="form-group text-right mb-0">
@@ -45,5 +47,24 @@
 <script>
 export default {
   name: "CheckIn",
+  data: () => ({
+    displayName: "",
+    email: ""
+  }),
+  methods: {
+    handleCheckIn() {
+      const checkInData = {
+        meetingId: this.$route.params.meetingId,
+        userId: this.$route.params.userId,
+        displayName: this.displayName,
+        email: this.email
+      };
+
+      this.$emit("checkIn", checkInData);
+
+      this.displayName = "";
+      this.email = "";
+    }
+  }
 };
 </script>

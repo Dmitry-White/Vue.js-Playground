@@ -5,7 +5,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Meetings from "../views/Meetings.vue";
 import Register from "../views/Register.vue";
-import CheckIn from '../views/CheckIn.vue';
+import CheckIn from "../views/CheckIn.vue";
 
 Vue.use(VueRouter);
 
