@@ -54,6 +54,7 @@
                 <button
                   class="btn btn-sm btn-outline-secondary"
                   title="Delete Meeting"
+                  @click.prevent="() => handleDelete(item.id)"
                 >
                   <FontAwesomeIcon icon="trash" />
                 </button>
@@ -103,6 +104,9 @@ export default {
       this.$emit("addMeeting", this.meetingName);
       this.meetingName = "";
       this.$refs.meetingName.focus();
+    },
+    handleDelete(id) {
+      this.$emit("deleteMeeting", id);
     }
   }
 };
