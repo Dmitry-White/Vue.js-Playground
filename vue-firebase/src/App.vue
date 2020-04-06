@@ -4,6 +4,7 @@
     <router-view
       class="container"
       :user="user"
+      :meetings="meetings"
       @logout="logout"
       @addMeeting="addMeeting"
     />
@@ -19,18 +20,18 @@ import db from "@/db";
 export default {
   name: "App",
   components: {
-    Navigation,
+    Navigation
   },
   data: () => ({
     user: null,
-    meetings: [],
+    meetings: []
   }),
   mounted() {
     this.checkUser();
   },
   methods: {
     checkUser() {
-      auth().onAuthStateChanged((user) => {
+      auth().onAuthStateChanged(user => {
         if (user) {
           this.user = user;
           this.getMeetings();
@@ -46,7 +47,7 @@ export default {
           this.user = null;
           this.$router.push("login");
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     },
     addMeeting(payload) {
       db.collection("users")
@@ -54,23 +55,23 @@ export default {
         .collection("meetings")
         .add({
           name: payload,
-          createdAt: firestore.FieldValue.serverTimestamp(),
+          createdAt: firestore.FieldValue.serverTimestamp()
         });
     },
     getMeetings() {
       db.collection("users")
         .doc(this.user.uid)
         .collection("meetings")
-        .onSnapshot((snapshot) => {
-          snapshot.forEach((doc) => {
+        .onSnapshot(snapshot => {
+          snapshot.forEach(doc => {
             this.meetings.push({
               id: doc.id,
-              name: doc.data().name,
+              name: doc.data().name
             });
           });
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
