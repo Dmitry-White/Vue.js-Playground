@@ -5,9 +5,11 @@
       class="container"
       :user="user"
       :meetings="meetings"
+      :error="error"
       @logout="logout"
       @addMeeting="addMeeting"
       @deleteMeeting="deleteMeeting"
+      @checkIn="checkIn"
     />
   </div>
 </template>
@@ -25,7 +27,8 @@ export default {
   },
   data: () => ({
     user: null,
-    meetings: []
+    meetings: [],
+    error: ""
   }),
   mounted() {
     this.checkUser();
@@ -86,6 +89,31 @@ export default {
         return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
       });
       return sortedList;
+    },
+    checkIn(payload) {
+      db.collection("users")
+        .doc(payload.userId)
+        .collection("meetings")
+        .doc(payload.meetingId)
+        .get()
+        .then(doc =>
+          doc.exists
+            ? this.addAttendee(payload)
+            : (this.error = "Sorry, no such meeting exists")
+        );
+    },
+    addAttendee(payload) {
+      db.collection("users")
+        .doc(payload.userId)
+        .collection("meetings")
+        .doc(payload.meetingId)
+        .collection("attendees")
+        .add({
+          displayName: payload.displayName,
+          email: payload.email,
+          createdAt: firestore.FieldValue.serverTimestamp()
+        })
+        .then(() => this.$router.push("/"));
     }
   }
 };
