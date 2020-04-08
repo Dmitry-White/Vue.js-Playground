@@ -10,6 +10,26 @@
           <div
             class="card-body px-3 py-2 d-flex align-items-center justify-content-center"
           >
+            <div class="btn-group pr-2">
+              <button
+                class="btn btn-sm btn-outline-secondary"
+                title="Give user a star"
+              >
+                <FontAwesomeIcon icon="star" />
+              </button>
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                title="Send user an email"
+              >
+                <FontAwesomeIcon icon="envelope" />
+              </a>
+              <button
+                class="btn btn-sm btn-outline-secondary"
+                title="Delete Attendee"
+              >
+                <FontAwesomeIcon icon="trash" />
+              </button>
+            </div>
             <div>{{ item.displayName }}</div>
           </div>
         </div>
@@ -19,23 +39,28 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import db from "@/db";
 
 export default {
   name: "Attendees",
-  data: () => ({
-    attendees: []
-  }),
-  mounted() {
-    const payload = {
-      meetingId: this.$route.params.meetingId,
-      userId: this.$route.params.userId
+  props: ["user"],
+  components: {
+    FontAwesomeIcon
+  },
+  data() {
+    return {
+      attendees: [],
+      userId: this.$route.params.userId,
+      meetingId: this.$route.params.meetingId
     };
-
+  },
+  mounted() {
     db.collection("users")
-      .doc(payload.userId)
+      .doc(this.userId)
       .collection("meetings")
-      .doc(payload.meetingId)
+      .doc(this.meetingId)
       .collection("attendees")
       .onSnapshot(snapshot => {
         const snapData = [];
