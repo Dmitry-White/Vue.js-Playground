@@ -10,7 +10,7 @@
           <div
             class="card-body px-3 py-2 d-flex align-items-center justify-content-center"
           >
-            <div class="btn-group pr-2">
+            <div class="btn-group pr-2" v-if="user && user.uid === userId">
               <button
                 class="btn btn-sm btn-outline-secondary"
                 title="Give user a star"
@@ -20,12 +20,14 @@
               <a
                 class="btn btn-sm btn-outline-secondary"
                 title="Send user an email"
+                :href="`mailto:${item.email}`"
               >
                 <FontAwesomeIcon icon="envelope" />
               </a>
               <button
                 class="btn btn-sm btn-outline-secondary"
                 title="Delete Attendee"
+                @click.prevent="() => handleDelete(item.id)"
               >
                 <FontAwesomeIcon icon="trash" />
               </button>
@@ -47,13 +49,13 @@ export default {
   name: "Attendees",
   props: ["user"],
   components: {
-    FontAwesomeIcon
+    FontAwesomeIcon,
   },
   data() {
     return {
       attendees: [],
       userId: this.$route.params.userId,
-      meetingId: this.$route.params.meetingId
+      meetingId: this.$route.params.meetingId,
     };
   },
   mounted() {
@@ -62,13 +64,13 @@ export default {
       .collection("meetings")
       .doc(this.meetingId)
       .collection("attendees")
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
         const snapData = [];
-        snapshot.forEach(doc => {
+        snapshot.forEach((doc) => {
           snapData.push({
             id: doc.id,
             email: doc.data().email,
-            displayName: doc.data().displayName
+            displayName: doc.data().displayName,
           });
         });
         this.attendees = this.sortAttendees(snapData);
@@ -82,7 +84,18 @@ export default {
           : 1;
       });
       return sortedList;
-    }
-  }
+    },
+    handleDelete(id) {
+      if (this.user && this.user.uid === this.userId) {
+        db.collection("users")
+          .doc(this.userId)
+          .collection("meetings")
+          .doc(this.meetingId)
+          .collection("attendees")
+          .doc(id)
+          .delete();
+      }
+    },
+  },
 };
 </script>
