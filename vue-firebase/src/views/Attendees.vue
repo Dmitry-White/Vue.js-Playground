@@ -12,8 +12,13 @@
           >
             <div class="btn-group pr-2" v-if="user && user.uid === userId">
               <button
-                class="btn btn-sm btn-outline-secondary"
+                class="btn btn-sm"
+                :class="[
+                  item.star ? 'text-danger' : '',
+                  'btn-outline-secondary'
+                ]"
                 title="Give user a star"
+                @click.prevent="() => handleStar(item.id)"
               >
                 <FontAwesomeIcon icon="star" />
               </button>
@@ -49,13 +54,13 @@ export default {
   name: "Attendees",
   props: ["user"],
   components: {
-    FontAwesomeIcon,
+    FontAwesomeIcon
   },
   data() {
     return {
       attendees: [],
       userId: this.$route.params.userId,
-      meetingId: this.$route.params.meetingId,
+      meetingId: this.$route.params.meetingId
     };
   },
   mounted() {
@@ -64,13 +69,14 @@ export default {
       .collection("meetings")
       .doc(this.meetingId)
       .collection("attendees")
-      .onSnapshot((snapshot) => {
+      .onSnapshot(snapshot => {
         const snapData = [];
-        snapshot.forEach((doc) => {
+        snapshot.forEach(doc => {
           snapData.push({
             id: doc.id,
             email: doc.data().email,
             displayName: doc.data().displayName,
+            star: doc.data().star
           });
         });
         this.attendees = this.sortAttendees(snapData);
@@ -85,6 +91,26 @@ export default {
       });
       return sortedList;
     },
+    handleStar(id) {
+      if (this.user && this.user.uid === this.userId) {
+        const ref = db
+          .collection("users")
+          .doc(this.userId)
+          .collection("meetings")
+          .doc(this.meetingId)
+          .collection("attendees")
+          .doc(id);
+
+        ref.get().then(doc => {
+          const star = doc.data().star;
+          if (star) {
+            ref.update({ star: !star });
+          } else {
+            ref.update({ star: true });
+          }
+        });
+      }
+    },
     handleDelete(id) {
       if (this.user && this.user.uid === this.userId) {
         db.collection("users")
@@ -95,7 +121,7 @@ export default {
           .doc(id)
           .delete();
       }
-    },
-  },
+    }
+  }
 };
 </script>
