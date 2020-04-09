@@ -12,7 +12,11 @@
         <router-link class="nav-item nav-link" to="/register" v-if="!user"
           >Register</router-link
         >
-        <button class="nav-item nav-link btn btn-link" @click="logout">
+        <button
+          class="nav-item nav-link btn btn-link"
+          @click="logout"
+          v-if="user"
+        >
           Logout
         </button>
       </div>

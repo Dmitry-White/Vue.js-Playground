@@ -12,8 +12,12 @@
                 placeholder="Search Attendees"
                 class="form-control"
                 v-model="searchQuery"
+                ref="searchQuery"
               />
-              <div class="input-group-append">
+              <div
+                class="input-group-append"
+                v-if="user && user.uid === userId"
+              >
                 <button
                   class="btn btn-sm btn-outline-info"
                   title="Pick a random attendee"
@@ -171,7 +175,9 @@ export default {
       this.displayAttendees = [this.attendees[randomAttendee]];
     },
     handleReset() {
-      console.log("Reset");
+      this.displayAttendees = this.attendees;
+      this.searchQuery = "";
+      this.$refs.searchQuery.focus();
     }
   }
 };

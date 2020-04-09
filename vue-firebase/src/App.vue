@@ -113,7 +113,9 @@ export default {
           email: payload.email,
           createdAt: firestore.FieldValue.serverTimestamp()
         })
-        .then(() => this.$router.push("/"));
+        .then(() =>
+          this.$router.push(`/attendees/${payload.userId}/${payload.meetingId}`)
+        );
     }
   }
 };
