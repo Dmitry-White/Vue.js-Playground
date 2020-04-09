@@ -93,6 +93,7 @@ export default {
   data() {
     return {
       attendees: [],
+      displayAttendees: [],
       userId: this.$route.params.userId,
       meetingId: this.$route.params.meetingId,
       searchQuery: ""
@@ -102,7 +103,7 @@ export default {
     filteredAttendees() {
       const searchFilter = item =>
         item.displayName.toLowerCase().match(this.searchQuery.toLowerCase());
-      return this.attendees.filter(searchFilter);
+      return this.displayAttendees.filter(searchFilter);
     }
   },
   mounted() {
@@ -122,6 +123,7 @@ export default {
           });
         });
         this.attendees = this.sortAttendees(snapData);
+        this.displayAttendees = this.sortAttendees(snapData);
       });
   },
   methods: {
@@ -165,7 +167,8 @@ export default {
       }
     },
     handleRandom() {
-      console.log("Random");
+      const randomAttendee = Math.floor(Math.random() * this.attendees.length);
+      this.displayAttendees = [this.attendees[randomAttendee]];
     },
     handleReset() {
       console.log("Reset");
