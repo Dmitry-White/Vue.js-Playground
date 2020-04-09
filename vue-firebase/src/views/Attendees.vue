@@ -37,7 +37,7 @@
     <div class="row justify-content-center">
       <div
         class="col-8 col-sm-6 col-md-4 col-lg-3 mb-2 p-0 px-1"
-        v-for="item in attendees"
+        v-for="item in filteredAttendees"
         :key="item.id"
       >
         <div class="card">
@@ -97,6 +97,13 @@ export default {
       meetingId: this.$route.params.meetingId,
       searchQuery: ""
     };
+  },
+  computed: {
+    filteredAttendees() {
+      const searchFilter = item =>
+        item.displayName.toLowerCase().match(this.searchQuery.toLowerCase());
+      return this.attendees.filter(searchFilter);
+    }
   },
   mounted() {
     db.collection("users")
