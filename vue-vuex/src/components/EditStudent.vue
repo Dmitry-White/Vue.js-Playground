@@ -24,14 +24,17 @@
 
 <script>
 import axios from "axios";
+
 import Students from "./Students";
 
 export default {
-  data() {
-    return {
-      name: ""
-    };
+  name: 'EditStudent',
+  components: {
+    Students,
   },
+  data: () => ({
+    name: "",
+  }),
   async created() {
       this.name = (await axios.get(`http://localhost:3000/students?id=${this.$route.params.id}`)).data[0].name;
   },
@@ -39,9 +42,6 @@ export default {
     async submit() {
       axios.put(`http://localhost:3000/students/${this.$route.params.id}`, { name: this.name });
     }
-  },
-  components: {
-      Students
   }
 };
 </script>

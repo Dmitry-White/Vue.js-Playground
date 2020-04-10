@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-btn flat to="/">Students List</v-btn>
-      <v-btn flat to="/NewStudent">New Student</v-btn>
-    </v-toolbar>
+    <v-app-bar app>
+      <v-btn text to="/">Students List</v-btn>
+      <v-btn text to="/NewStudent">New Student</v-btn>
+    </v-app-bar>
     <v-content>
-      <br>
+      <br />
       <router-view />
     </v-content>
   </v-app>
@@ -16,18 +16,13 @@ import NewStudent from "./components/NewStudent";
 import Students from "./components/Students";
 import EditStudent from "./components/EditStudent";
 
-
 export default {
   name: "App",
   components: {
     NewStudent,
     Students,
-    EditStudent
+    EditStudent,
   },
-  data() {
-    return {
-      //
-    };
-  }
+  data: () => ({}),
 };
 </script>
