@@ -7,7 +7,7 @@
 
       <v-list>
         <v-list-item
-          v-for="(student, i) in $store.state.students"
+          v-for="(student, i) in students"
           :key="i"
           :to="`/editStudent/${i}`"
         >
@@ -21,7 +21,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "Students",
+  computed: mapState({
+    students: (state) => state.students
+  }),
 };
 </script>
