@@ -7,7 +7,7 @@
 
       <v-list>
         <v-list-item
-          v-for="(student, i) in students"
+          v-for="(student, i) in $store.state.students"
           :key="i"
           :to="`/editStudent/${i}`"
         >
@@ -21,15 +21,7 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  name: "Student",
-  data: () => ({
-    students: [],
-  }),
-  async created() {
-    this.students = (await axios.get("http://localhost:3000/students")).data;
-  },
+  name: "Students",
 };
 </script>

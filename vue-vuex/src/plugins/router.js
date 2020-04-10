@@ -14,7 +14,7 @@ const routerOptions = {
     { path: "/EditStudent/:id", component: EditStudent },
   ],
   mode: 'history'
-}
+};
 
 const router = new VueRouter(routerOptions);
 
