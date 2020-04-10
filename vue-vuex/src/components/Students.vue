@@ -12,7 +12,9 @@
           :to="`/editStudent/${i}`"
         >
           <v-list-item-content>
-            <v-list-item-title v-text="student.name"></v-list-item-title>
+            <v-list-item-title
+              v-text="`${student.firstName} ${student.lastName}`"
+            ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -21,12 +23,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   name: "Students",
   computed: mapState({
-    students: (state) => state.students
+    students: (state) => state.students,
   }),
 };
 </script>
