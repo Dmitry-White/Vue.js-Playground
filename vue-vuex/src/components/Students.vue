@@ -5,7 +5,16 @@
         <v-toolbar-title>Students</v-toolbar-title>
       </v-toolbar>
 
-      <v-list>
+      <v-container class="text-center" v-if="!$store.getters.isLoaded">
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="gray"
+            indeterminate
+          />
+        </v-container>
+
+      <v-list v-if="$store.getters.isLoaded">
         <v-list-item
           v-for="(student, i) in $store.getters.students"
           :key="i"

@@ -1,11 +1,21 @@
 <template>
-  <div v-if="$store.getters.isLoaded">
-    <v-flex sm8 offset-sm2>
+  <div>
+    <v-flex sm8 offset-sm2 v-if="$store.getters.isLoaded">
       <v-card>
         <v-toolbar dark>
           <v-toolbar-title>Edit Student</v-toolbar-title>
         </v-toolbar>
-        <v-form>
+
+        <v-container class="text-center" v-if="!$store.getters.isLoaded">
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="gray"
+            indeterminate
+          />
+        </v-container>
+
+        <v-form v-if="$store.getters.isLoaded">
           <v-container>
             <v-layout>
               <v-flex xs12 md4>
@@ -44,7 +54,7 @@ export default {
   computed: {
     student() {
       return this.$store.getters.findStudent(this.$route.params.id);
-    }
+    },
   },
   methods: {
     async submit() {
