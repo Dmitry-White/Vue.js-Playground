@@ -6,15 +6,15 @@
       </v-toolbar>
 
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="(student, i) in students"
           :key="i"
           :to="`/editStudent/${i}`"
         >
-          <v-list-tile-content>
-            <v-list-tile-title v-text="student.name"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-list-item-content>
+            <v-list-item-title v-text="student.name"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-card>
   </v-flex>
@@ -24,7 +24,7 @@
 import axios from "axios";
 
 export default {
-  name: "NewStudent",
+  name: "Student",
   data: () => ({
     students: [],
   }),
