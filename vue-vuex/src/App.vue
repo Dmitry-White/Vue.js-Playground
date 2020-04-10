@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 import NewStudent from "./components/NewStudent";
 import Students from "./components/Students";
@@ -27,7 +27,7 @@ export default {
   },
   async created() {
     const students = (await axios.get("http://localhost:3000/students")).data;
-    this.$store.state.students = students;
-  }
+    this.$store.commit("setStudents", students);
+  },
 };
 </script>

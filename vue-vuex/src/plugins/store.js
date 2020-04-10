@@ -16,6 +16,9 @@ const storeOptions = {
     isLoaded: (state) => !!state.students.length
   },
   mutations: {
+    setStudents(state, students) {
+      state.students = students;
+    }
   },
   actions: {
   },
