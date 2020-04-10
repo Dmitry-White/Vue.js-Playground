@@ -12,7 +12,8 @@ const storeOptions = {
       ...student,
       fullName: `${student.firstName} ${student.lastName}`
     })),
-    findStudent: (state) => (id) => state.students.find(student => student.id == id)
+    findStudent: (state) => (id) => state.students.find(student => student.id == id),
+    isLoaded: (state) => !!state.students.length
   },
   mutations: {
   },
