@@ -11,7 +11,8 @@ const storeOptions = {
     students: (state) => state.students.map(student => ({
       ...student,
       fullName: `${student.firstName} ${student.lastName}`
-    }))
+    })),
+    findStudent: (state) => (id) => state.students.find(student => student.id == id)
   },
   mutations: {
   },
