@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-flex sm8 offset-sm2 v-if="$store.getters.isLoaded">
+    <v-flex sm8 offset-sm2 v-if="isLoaded">
       <v-card>
         <v-toolbar dark>
           <v-toolbar-title>Edit Student</v-toolbar-title>
         </v-toolbar>
 
-        <v-container class="text-center" v-if="!$store.getters.isLoaded">
+        <v-container class="text-center" v-if="!isLoaded">
           <v-progress-circular
             :size="70"
             :width="7"
@@ -15,17 +15,17 @@
           />
         </v-container>
 
-        <v-form v-if="$store.getters.isLoaded">
+        <v-form v-if="isLoaded">
           <v-container>
             <v-layout>
               <v-flex xs12 md4>
                 <v-text-field
-                  v-model="student.firstName"
+                  v-model="student($route.params.id).firstName"
                   label="First Name"
                   required
                 />
                 <v-text-field
-                  v-model="student.lastName"
+                  v-model="student($route.params.id).lastName"
                   label="Last Name"
                   required
                 />
@@ -43,6 +43,7 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from 'vuex';
 
 import Students from "./Students";
 
@@ -52,9 +53,10 @@ export default {
     Students,
   },
   computed: {
-    student() {
-      return this.$store.getters.findStudent(this.$route.params.id);
-    },
+    ...mapGetters({
+      isLoaded: 'isLoaded',
+      student: 'findStudent'
+    })
   },
   methods: {
     async submit() {

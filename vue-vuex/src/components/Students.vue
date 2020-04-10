@@ -5,25 +5,18 @@
         <v-toolbar-title>Students</v-toolbar-title>
       </v-toolbar>
 
-      <v-container class="text-center" v-if="!$store.getters.isLoaded">
-          <v-progress-circular
-            :size="70"
-            :width="7"
-            color="gray"
-            indeterminate
-          />
-        </v-container>
+      <v-container class="text-center" v-if="!isLoaded">
+        <v-progress-circular :size="70" :width="7" color="gray" indeterminate />
+      </v-container>
 
-      <v-list v-if="$store.getters.isLoaded">
+      <v-list v-if="isLoaded">
         <v-list-item
-          v-for="(student, i) in $store.getters.students"
+          v-for="(student, i) in students"
           :key="i"
           :to="`/editStudent/${i}`"
         >
           <v-list-item-content>
-            <v-list-item-title
-              v-text="student.fullName"
-            ></v-list-item-title>
+            <v-list-item-title v-text="student.fullName"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -32,12 +25,15 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "Students",
-  computed: mapState({
-    students: (state) => state.students,
-  }),
+  computed: {
+    ...mapGetters([
+      'isLoaded',
+      'students'
+    ])
+  },
 };
 </script>
