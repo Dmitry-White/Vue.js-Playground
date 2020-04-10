@@ -7,13 +7,13 @@
 
       <v-list>
         <v-list-item
-          v-for="(student, i) in students"
+          v-for="(student, i) in $store.getters.students"
           :key="i"
           :to="`/editStudent/${i}`"
         >
           <v-list-item-content>
             <v-list-item-title
-              v-text="`${student.firstName} ${student.lastName}`"
+              v-text="student.fullName"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>

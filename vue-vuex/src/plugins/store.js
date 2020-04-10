@@ -7,6 +7,12 @@ const storeOptions = {
   state: {
     students: []
   },
+  getters: {
+    students: (state) => state.students.map(student => ({
+      ...student,
+      fullName: `${student.firstName} ${student.lastName}`
+    }))
+  },
   mutations: {
   },
   actions: {
