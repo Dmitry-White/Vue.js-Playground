@@ -5,7 +5,7 @@
         <v-toolbar dark>
           <v-toolbar-title>New Student</v-toolbar-title>
         </v-toolbar>
-        <v-form>
+        <v-form @submit.prevent="submit">
           <v-container>
             <v-layout>
               <v-flex xs12 md4>
@@ -14,7 +14,7 @@
               </v-flex>
             </v-layout>
           </v-container>
-          <v-btn @click="submit">submit</v-btn>
+          <v-btn type="submit">submit</v-btn>
         </v-form>
       </v-card>
     </v-flex>
@@ -25,6 +25,7 @@
 
 <script>
 import axios from "axios";
+import { mapMutations } from 'vuex';
 
 import Students from "./Students";
 
@@ -38,11 +39,18 @@ export default {
     lastName: "",
   }),
   methods: {
+    ...mapMutations([
+      'addStudent',
+    ]),
     async submit() {
-      axios.post("http://localhost:3000/students", {
+      const student = await axios.post("http://localhost:3000/students", {
         firstName: this.firstName,
         lastName: this.lastName,
       });
+      this.addStudent(student.data);
+
+      this.firstName = "";
+      this.lastName = "";
     },
   },
 };

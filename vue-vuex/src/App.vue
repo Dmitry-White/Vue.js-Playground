@@ -26,8 +26,8 @@ export default {
     EditStudent,
   },
   async created() {
-    const students = (await axios.get("http://localhost:3000/students")).data;
-    this.$store.commit("setStudents", students);
+    const students = await axios.get("http://localhost:3000/students");
+    this.$store.commit("setStudents", students.data);
   },
 };
 </script>

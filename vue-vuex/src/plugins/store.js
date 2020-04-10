@@ -18,6 +18,9 @@ const storeOptions = {
   mutations: {
     setStudents(state, students) {
       state.students = students;
+    },
+    addStudent(state, student) {
+      state.students.push(student);
     }
   },
   actions: {
