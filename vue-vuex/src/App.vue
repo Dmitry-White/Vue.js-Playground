@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import NewStudent from "./components/NewStudent";
 import Students from "./components/Students";
 import EditStudent from "./components/EditStudent";
@@ -26,8 +24,7 @@ export default {
     EditStudent,
   },
   async created() {
-    const students = await axios.get("http://localhost:3000/students");
-    this.$store.commit("setStudents", students.data);
+    this.$store.dispatch('getStudents');
   },
 };
 </script>

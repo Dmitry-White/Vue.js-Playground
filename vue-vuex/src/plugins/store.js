@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -24,6 +25,10 @@ const storeOptions = {
     }
   },
   actions: {
+    async getStudents({ commit }) {
+      const students = await axios.get("http://localhost:3000/students");
+      commit("setStudents", students.data);
+    }
   },
   modules: {
   }
