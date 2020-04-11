@@ -43,11 +43,12 @@ export default {
       'addStudent',
     ]),
     async submit() {
-      const student = await axios.post("http://localhost:3000/students", {
+      const payload = {
         firstName: this.firstName,
         lastName: this.lastName,
-      });
-      this.addStudent(student.data);
+      };
+
+      this.$store.dispatch('createStudent', payload);
 
       this.firstName = "";
       this.lastName = "";

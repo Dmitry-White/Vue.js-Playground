@@ -29,6 +29,11 @@
       "firstName": "Harry",
       "lastName": "Potter",
       "id": 5
+    },
+    {
+      "firstName": "New",
+      "lastName": "Student",
+      "id": 6
     }
   ]
 }

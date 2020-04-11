@@ -28,6 +28,13 @@ const storeOptions = {
     async getStudents({ commit }) {
       const students = await axios.get("http://localhost:3000/students");
       commit("setStudents", students.data);
+    },
+    async createStudent({ commit }, payload) {
+      const student = await axios.post("http://localhost:3000/students", {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      });
+      commit('addStudent', student.data);
     }
   },
   modules: {
