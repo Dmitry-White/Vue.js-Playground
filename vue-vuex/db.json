@@ -2,7 +2,7 @@
   "students": [
     {
       "firstName": "John",
-      "lastName": "",
+      "lastName": "Doe The First",
       "id": 0
     },
     {
@@ -34,6 +34,11 @@
       "firstName": "New",
       "lastName": "Student",
       "id": 6
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "id": 7
     }
   ]
 }

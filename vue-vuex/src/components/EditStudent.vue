@@ -15,7 +15,7 @@
           />
         </v-container>
 
-        <v-form v-if="isLoaded">
+        <v-form v-if="isLoaded" @submit.prevent="submit">
           <v-container>
             <v-layout>
               <v-flex xs12 md4>
@@ -34,7 +34,7 @@
               </v-flex>
             </v-layout>
           </v-container>
-          <v-btn @click="submit">submit</v-btn>
+          <v-btn type="submit">submit</v-btn>
         </v-form>
       </v-card>
     </v-flex>
@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     async submit() {
-      const student = findStudent(this.$route.params.id);
+      const student = this.findStudent(this.$route.params.id);
       const payload = {
         firstName: this.firstName || student.firstName,
         lastName: this.lastName || student.lastName,

@@ -22,6 +22,10 @@ const storeOptions = {
     },
     addStudent(state, student) {
       state.students.push(student);
+    },
+    updateStudent(state, student) {
+      const index = state.students.findIndex(s => s.id == student.id);
+      Vue.set(state.students, index, student);
     }
   },
   actions: {
@@ -37,10 +41,11 @@ const storeOptions = {
       commit('addStudent', student.data);
     },
     async editStudent({ commit }, {id , payload}) {
-      axios.put(`http://localhost:3000/students/${id}`, {
+      const student = await axios.put(`http://localhost:3000/students/${id}`, {
         firstName: payload.firstName,
         lastName: payload.lastName,
       });
+      commit('updateStudent', student.data);
     }
   },
   modules: {
