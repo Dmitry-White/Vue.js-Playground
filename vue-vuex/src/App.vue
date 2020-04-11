@@ -8,8 +8,8 @@
       <br />
       <router-view />
     </v-content>
-    <v-snackbar v-model="$store.state.isError">{{
-      $store.state.error
+    <v-snackbar v-model="$store.state.errorSystem.isError">{{
+      $store.state.errorSystem.error
     }}</v-snackbar>
   </v-app>
 </template>

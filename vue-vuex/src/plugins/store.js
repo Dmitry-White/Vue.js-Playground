@@ -4,11 +4,22 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
+const errorSystem = {
+  state: {
+    isError: true,
+    error: ''
+  },
+  mutations: {
+    showError(state, message) {
+      state.isError = true;
+      state.error = message;
+    }
+  }
+}
+
 const storeOptions = {
   state: {
     students: [],
-    isError: true,
-    error: ''
   },
   getters: {
     students: (state) => state.students.map(student => ({
@@ -28,10 +39,6 @@ const storeOptions = {
     updateStudent(state, student) {
       const index = state.students.findIndex(s => s.id == student.id);
       Vue.set(state.students, index, student);
-    },
-    showError(state, message) {
-      state.isError = true;
-      state.error = message;
     }
   },
   actions: {
@@ -59,6 +66,7 @@ const storeOptions = {
     }
   },
   modules: {
+    errorSystem,
   }
 };
 
