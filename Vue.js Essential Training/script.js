@@ -88,11 +88,6 @@ const methods = {
   },
 };
 
-Vue.filter('currency', function (price) {
-  const formattedPrice = Number.parseFloat(price).toFixed(2);
-  return `$${formattedPrice}`;
-})
-
 Vue.component('price', {
   props: {
     prefix: {
