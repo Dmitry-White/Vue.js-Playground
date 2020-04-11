@@ -8,6 +8,9 @@
       <br />
       <router-view />
     </v-content>
+    <v-snackbar v-model="$store.state.isError">{{
+      $store.state.error
+    }}</v-snackbar>
   </v-app>
 </template>
 
@@ -24,7 +27,7 @@ export default {
     EditStudent,
   },
   async created() {
-    this.$store.dispatch('getStudents');
+    this.$store.dispatch("getStudents");
   },
 };
 </script>

@@ -6,7 +6,9 @@ Vue.use(Vuex);
 
 const storeOptions = {
   state: {
-    students: []
+    students: [],
+    isError: true,
+    error: ''
   },
   getters: {
     students: (state) => state.students.map(student => ({
@@ -26,12 +28,20 @@ const storeOptions = {
     updateStudent(state, student) {
       const index = state.students.findIndex(s => s.id == student.id);
       Vue.set(state.students, index, student);
+    },
+    showError(state, message) {
+      state.isError = true;
+      state.error = message;
     }
   },
   actions: {
     async getStudents({ commit }) {
-      const students = await axios.get("http://localhost:3000/students");
-      commit("setStudents", students.data);
+      try {
+        const students = await axios.get("http://localhost:3000/students");
+        commit("setStudents", students.data);
+      } catch (error) {
+        commit("showError", error.message);
+      }
     },
     async createStudent({ commit }, payload) {
       const student = await axios.post("http://localhost:3000/students", {
@@ -40,7 +50,7 @@ const storeOptions = {
       });
       commit('addStudent', student.data);
     },
-    async editStudent({ commit }, {id , payload}) {
+    async editStudent({ commit }, { id, payload }) {
       const student = await axios.put(`http://localhost:3000/students/${id}`, {
         firstName: payload.firstName,
         lastName: payload.lastName,
