@@ -24,9 +24,6 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapMutations } from 'vuex';
-
 import Students from "./Students";
 
 export default {
@@ -39,9 +36,6 @@ export default {
     lastName: "",
   }),
   methods: {
-    ...mapMutations([
-      'addStudent',
-    ]),
     async submit() {
       const payload = {
         firstName: this.firstName,

@@ -20,12 +20,14 @@
             <v-layout>
               <v-flex xs12 md4>
                 <v-text-field
-                  v-model="student($route.params.id).firstName"
+                  @input="updateFirstName"
+                  :value="findStudent($route.params.id).firstName"
                   label="First Name"
                   required
                 />
                 <v-text-field
-                  v-model="student($route.params.id).lastName"
+                  @input="updateLastName"
+                  :value="findStudent(this.$route.params.id).lastName"
                   label="Last Name"
                   required
                 />
@@ -43,7 +45,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 import Students from "./Students";
 
@@ -52,18 +54,33 @@ export default {
   components: {
     Students,
   },
+  data() {
+    return {
+      firstName: "",
+      lastName: "",
+    };
+  },
   computed: {
-    ...mapGetters({
-      isLoaded: 'isLoaded',
-      student: 'findStudent'
-    })
+    ...mapGetters(["isLoaded", "findStudent"]),
   },
   methods: {
     async submit() {
-      axios.put(`http://localhost:3000/students/${this.$route.params.id}`, {
-        firstName: this.student.firstName,
-        lastName: this.student.lastName,
+      const student = findStudent(this.$route.params.id);
+      const payload = {
+        firstName: this.firstName || student.firstName,
+        lastName: this.lastName || student.lastName,
+      };
+
+      this.$store.dispatch("editStudent", {
+        id: this.$route.params.id,
+        payload,
       });
+    },
+    updateFirstName(value) {
+      this.firstName = value;
+    },
+    updateLastName(value) {
+      this.lastName = value;
     },
   },
 };

@@ -35,6 +35,12 @@ const storeOptions = {
         lastName: payload.lastName,
       });
       commit('addStudent', student.data);
+    },
+    async editStudent({ commit }, {id , payload}) {
+      axios.put(`http://localhost:3000/students/${id}`, {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      });
     }
   },
   modules: {
