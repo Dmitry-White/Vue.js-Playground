@@ -19,7 +19,7 @@ export default {
   mounted() {
     auth().onAuthStateChanged(user => {
       this.user = user.email;
-    })
+    });
   },
   components: {
     Navigation
