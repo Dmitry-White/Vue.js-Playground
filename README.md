@@ -11,3 +11,5 @@
 5. [Vue.js: Full-Stack Applications with Firebase](https://www.linkedin.com/learning/vue-js-full-stack-applications-with-firebase)
 
 6. [Learning Vuex](https://www.linkedin.com/learning/learning-vuex)
+
+7. [Vue - The Complete Guide (incl. Router & Composition API)](https://www.udemy.com/course/vuejs-2-the-complete-guide/)
